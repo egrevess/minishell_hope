@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/05/19 11:38:07 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/08 19:36:23 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ int	main(int argc, char **argv, char **env)
 			if (!str)
 				ft_exit();
 			add_history(str);
-			s.pars = ft_parse(str);
-			s.pars = ft_pipe(&s, &p);
-			result_bis = ft_pipes(&s,&p);
-			ft_sub_dollar(&s);
-			s.pars = ft_parse_quotes(&s);
 			if (index == 0)
 			{
 				result = ft_init_env(&s,env);
@@ -74,6 +69,11 @@ int	main(int argc, char **argv, char **env)
 				if (result == 0)
 					exit (EXIT_FAILURE);
 			}
+			s.pars = ft_parse(str, &s);
+			s.pars = ft_pipe(&s, &p);
+			result_bis = ft_pipes(&s,&p);
+			ft_sub_dollar(&s);
+			s.pars = ft_parse_quotes(&s);
 			ft_find_pdw(&s);
 			if (s.pars)
 			{

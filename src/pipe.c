@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:56:16 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/19 11:38:33 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/14 13:43:15 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,29 @@ t_list *init_list(t_struc *s, t_list *c)
 	return (c);
 }
 
-void	ft_execve_pipe(t_struc *s, char **command)
+int	ft_execve_pipe(t_struc *s, char **command)
 {
-	/*
-	printf("Executing command: ");
-    int i = 0;
-    while (command[i] != NULL) {
-        printf("%s ", command[i]);
-        i++;
-    }
-    printf("\n");*/
-	if (access(ft_strjoin("/bin/", command[0]), X_OK) == 0)
-		execve(ft_strjoin("/bin/", command[0]), command, s->env);
-	else if (access(ft_strjoin("/usr/bin/", command[0]), X_OK) == 0)
-		execve(ft_strjoin("/usr/bin/", command[0]), command, s->env);
-	else if (access(ft_strjoin("/usr/local/bin/", command[0]), X_OK) == 0)
-		execve(ft_strjoin("/usr/local/bin/", command[0]), command, s->env);
-	else
-		printf("error\n");
+	int		i;
+	
+	i = 0;
+	if (ft_in_env(s,"PATH") != -1) 
+		s->path = ft_split(ft_find_in_env(s, ft_in_env(s,"PATH")), ':');
+	if (!s->path)
+	{
+		printf("minishell: %s: command not found\n",command[0]);
+		exit(EXIT_FAILURE);
+	}
+	while (s->path[i])
+	{
+        //printf("s->path[i]= %s <=====> command[0]= %s <=====> command[1] = %s\n ",s->path[i],command[0], command[1]);
+		if (access(ft_strjoin(ft_strjoin(s->path[i],"/"), command[0]), X_OK) == 0)
+			return (execve(ft_strjoin(ft_strjoin(s->path[i],"/"),command[0]), command, s->env));
+		else if (access(command[0], X_OK) == 0)
+			return (execve(command[0], command, s->env));
+		i++;
+	}
+	printf("minishell: %s: command not found\n",command[0]);
+	return (1);
 }
 
 int ft_count_pipe1(t_struc *s) //METTRE DANS PIPE.C LE NOUVEAU FT_COUNT_PIPE (QUI EST UNE NOUVELLE FONCTION )

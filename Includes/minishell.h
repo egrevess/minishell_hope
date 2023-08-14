@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/05/19 11:55:12 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/08 19:44:19 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_struc
 	char	**new_pars_pipe;
 	int		nb_pipe;
 	int		echo_quotes;
-	//t_var	*var;
+	char	*heredoc_content;
 }		t_struc;
 
 typedef struct s_var
@@ -66,7 +66,7 @@ typedef struct s_command
 }		t_command;
 
 void    put_head(void);
-char    **ft_parse(char *str);
+char    **ft_parse(char *str, t_struc *s);
 char	**ft_parse_quotes(t_struc *s);
 void	ft_builtins(t_struc *s);
 int		len_pars(char **pars);
@@ -97,7 +97,8 @@ void	ft_sub_dollar(t_struc *s);
 int		ft_find_in_env_dollar(t_struc *s, int index);
 int		ft_in_env(t_struc *s, char *var);
 void 	pipes(t_struc *s/*char *in, char *out*/);
+int		ft_execve_pipe(t_struc *s, char **command);
 void	parse_and_execute(t_struc *s, t_list *c);
-void 	pipes5(t_struc *s/*char *in, char *out*/);
+void	heredoc_handle(t_struc *s, char *delimiter);
 
 #endif

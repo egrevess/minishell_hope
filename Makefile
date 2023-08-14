@@ -20,6 +20,7 @@ SRC =	src/main.c\
 		src/dollar.c\
 		src/parsing/parsing_utils.c\
 		src/parsing/parsing_pipe.c \
+		src/heredoc.c\
 
 OBJ = $(SRC:.c=.o)
 

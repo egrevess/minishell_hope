@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/06/22 16:25:08 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/14 13:18:57 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 #include <stdio.h>		// A retirer !!!
 
-char    **ft_parse(char *str)
+char    **ft_parse(char *str, t_struc *s)
 {
+	/*
 	char **line;
 	int i =0;
 		
@@ -24,6 +25,27 @@ char    **ft_parse(char *str)
 	{
 		printf("%s\n", line[i]);
 		i++;
+	}*/
+	int i =0;
+	char	*delimiter = NULL;
+	s->heredoc_content = "\0";
+
+	while (str[i])
+	{
+		if (str[i] == '<' && str[i+1] == '<')
+			{
+				if (str[i+2] == ' ')
+					delimiter = ft_substr(str, i+3, ft_strlen(str));
+				else
+					delimiter = ft_substr(str, i+2, ft_strlen(str));
+				break;
+			}
+		i++;
+	}
+	if (delimiter)
+	{
+		s->pars = ft_split(str, ' ');
+		heredoc_handle(s, delimiter);
 	}
 	return (ft_split(str, ' '));
 }
