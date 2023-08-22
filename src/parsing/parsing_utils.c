@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:52 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/17 17:04:23 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_find_in_env(t_struc *s, int i)
 	int		x;
 
 	len = (int) ft_strlen(s->env[i]);
-	index = (int) (ft_strrchr((const char*) s->env[i], '=') - s->env[i]) + 1;
+	index = (int)(ft_strrchr((const char*) s->env[i], '=') - s->env[i]) + 1;
 	temp = malloc(sizeof(*temp) * (len - index + 1));
 	if (!temp)
 		exit(EXIT_FAILURE);
@@ -45,15 +45,15 @@ int	ft_find_in_env_dollar(t_struc *s, int index)
 	par = malloc(sizeof(*par) * (s->size_second_pars));
 	if (!par)
 		exit (EXIT_FAILURE);
-	par = ft_memcpy(par,&s->pars[index][1], (size_t) (s->size_second_pars - 1)); //cherche la dernière occurence de $
+	par = ft_memcpy(par, &s->pars[index][1], (size_t)(s->size_second_pars - 1)); //cherche la dernière occurence de $
 	i = 0;
 	while (s->env[i])
 	{
-		if (ft_strncmp(s->env[i], par , (size_t) (s->size_second_pars - 1)) == 0
+		if (ft_strncmp(s->env[i], par, (size_t)(s->size_second_pars - 1)) == 0
 			&& (s->size_second_pars - 1) == (int) (ft_strrchr((const char*) s->env[i], '=') - s->env[i]))
 		{
 			check = i;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -62,18 +62,18 @@ int	ft_find_in_env_dollar(t_struc *s, int index)
 
 void	check_double_quotes(t_struc *s, int index)
 {
-	int i;
-	int	check;
-	int	len;
-	int reps;
-	char **par;
+	int		i;
+	int		check;
+	int		len;
+	int		reps;
+	char	**par;
 
 	check = 0;
 	reps = 0;
 	i = 0;
 	len = (int) ft_strlen(s->pars[index]);
 	par = NULL;
-	while(s->pars[index][i] == '\"' )
+	while (s->pars[index][i] == '\"' )
 	{
 		reps++;
 		i++;
@@ -83,7 +83,7 @@ void	check_double_quotes(t_struc *s, int index)
 	i++;
 	while (s->pars[index][i] && s->pars[index][i] != '\"')
 		i++;
-	while(s->pars[index][i] && s->pars[index][i] == '\"')
+	while (s->pars[index][i] && s->pars[index][i] == '\"')
 	{
 		check++;
 		i++;
@@ -103,7 +103,7 @@ void	check_double_quotes(t_struc *s, int index)
 
 void	ft_sub_dollar(t_struc *s)
 {
-	int index;
+	int	index;
 	int	pass;
 
 	index = 0;

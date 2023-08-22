@@ -6,7 +6,7 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/08/08 19:44:19 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/17 16:50:36 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <signal.h>
 # include <limits.h>
 
-int g_output; 
+int	g_output;
 
 typedef struct s_struc
 {
@@ -48,9 +48,9 @@ typedef struct s_var
 	char	*value;
 }		t_var;
 
-typedef	struct s_pipe
+typedef struct s_pipe
 {
-	int	nb_pipe;
+	int		nb_pipe;
 	int		i;
 	int		j;
 	int		until;
@@ -65,8 +65,8 @@ typedef struct s_command
 	struct t_command	*next;
 }		t_command;
 
-void    put_head(void);
-char    **ft_parse(char *str, t_struc *s);
+void	put_head(void);
+char	**ft_parse(char *str, t_struc *s);
 char	**ft_parse_quotes(t_struc *s);
 void	ft_builtins(t_struc *s);
 int		len_pars(char **pars);
@@ -96,7 +96,7 @@ void	ft_dollar(t_struc *s);
 void	ft_sub_dollar(t_struc *s);
 int		ft_find_in_env_dollar(t_struc *s, int index);
 int		ft_in_env(t_struc *s, char *var);
-void 	pipes(t_struc *s/*char *in, char *out*/);
+void	pipes(t_struc *s/*char *in, char *out*/);
 int		ft_execve_pipe(t_struc *s, char **command);
 void	parse_and_execute(t_struc *s, t_list *c);
 void	heredoc_handle(t_struc *s, char *delimiter);

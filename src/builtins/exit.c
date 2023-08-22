@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:00:01 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:23 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/17 17:28:32 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_exit_par(t_struc *s)
 			g_output = 255;
 			exit (255);
 		}
-		else if(check == 0)
+		else if (check == 0)
 		{
 			g_output = exit_value;
 			printf("exit\n");

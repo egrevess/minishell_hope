@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:52:24 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/19 11:49:59 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/17 16:59:25 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	check_pipe(t_struc *s, t_pipe *p)
 		i++;
 	}
 	i = 0;
-	while(s->pars[i])
+	while (s->pars[i])
 	{
-		if (s->pars[i][0] == '|' && ((int) ft_strlen(s->pars[i]) > 1 
+		if (s->pars[i][0] == '|' && ((int) ft_strlen(s->pars[i]) > 1
 			|| (!s->pars[i + 1] || check_only_quotes(s->pars, i + 1) == 0)
 			|| ((s->pars[i + 1] && s->pars[i + 1][0] == '|'))))
-			return(1);
+			return (1);
 		i++;
 	}
 	return (0);
@@ -71,11 +71,11 @@ int	ft_count_pipe(char **line, t_pipe *p)
 	int	i;
 	int	j;
 	int	nb;
-	int check;
+	int	check;
 	int	len;
-	int quotes;
-	int two;
-	
+	int	quotes;
+	int	two;
+
 	i = 0;
 	nb = 0;
 	quotes = 0;
@@ -117,7 +117,7 @@ int	ft_count_pipe(char **line, t_pipe *p)
 			}
 			else if (line[i][j] == '|' && len > 1 && quotes == 0)
 			{
-				if (check != j - 1 && j != 0 )
+				if (check != j - 1 && j != 0)
 					nb++;
 				check = j;
 			}
@@ -125,7 +125,6 @@ int	ft_count_pipe(char **line, t_pipe *p)
 		}
 		i++;
 	}
-	//printf("%d\n", nb);
 	p->nb_pipe = nb;
 	return (nb);
 }
@@ -136,7 +135,7 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 	int		j;
 	int		until;
 	int		start;
-	int 	nb_pipe;
+	int		nb_pipe;
 	char	**temp;
 	int		index;
 
@@ -163,10 +162,10 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 				{
 					until = 0;
 					start = j;
-					while(s->pars[i][j])
+					while (s->pars[i][j])
 					{
 						if (s->pars[i][j] == '|')
-							break;
+							break ;
 						j++;
 					}
 					printf("inde = %d\n", index);
@@ -183,7 +182,7 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 				else if (s->pars[i][j] == '|')
 				{
 					until = 0;
-					while(s->pars[i][j] == '|')
+					while (s->pars[i][j] == '|')
 					{
 						nb_pipe++;
 						j++;
@@ -213,7 +212,7 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 		*/
 		//free(s->pars);
 		return (temp);
-	}	
-	else 
+	}
+	else
 		return (s->pars);
 }

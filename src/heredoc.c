@@ -6,38 +6,38 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:18:36 by victorburto       #+#    #+#             */
-/*   Updated: 2023/08/14 13:57:23 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/17 15:35:09 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
 void execute_with_heredoc(t_struc *s,char *command, char *heredoc_content) {
-    int pipefd[2];
+	int pipefd[2];
 	char *com[2];
-    pipe(pipefd);
+	pipe(pipefd);
 	com[0] = command;
 	com[1] = heredoc_content;
 
-    pid_t pid = fork();
-    if (pid == 0) {
-        // Enfant
-        close(pipefd[1]);
-        dup2(pipefd[0], STDIN_FILENO);
-        close(pipefd[0]);
+	pid_t pid = fork();
+	if (pid == 0) {
+		// Enfant
+		close(pipefd[1]);
+		dup2(pipefd[0], STDIN_FILENO);
+		close(pipefd[0]);
 
-        // Exécute la commande
-        ft_execve_pipe(s, com);
+		// Exécute la commande
+		ft_execve_pipe(s, com);
 
-        exit(0);
-    } else if (pid > 0) {
-        // Parent
-        close(pipefd[0]);
-        write(pipefd[1], heredoc_content, ft_strlen(heredoc_content));
-        close(pipefd[1]);
+		exit(0);
+	} else if (pid > 0) {
+		// Parent
+		close(pipefd[0]);
+		write(pipefd[1], heredoc_content, ft_strlen(heredoc_content));
+		close(pipefd[1]);
 
-        wait(NULL);
-    }
+		wait(NULL);
+	}
 }
 
 void    heredoc_handle(t_struc *s, char *delimiter)

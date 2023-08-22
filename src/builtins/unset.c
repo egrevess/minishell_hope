@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 00:18:14 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:36 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/17 17:31:13 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	ft_find_in_env_unset(t_struc *s, int index)
 	while (s->env[i])
 	{
 		if (ft_strncmp(s->env[i], s->pars[index], (size_t) size) == 0
-			&& (size == ((int) (ft_strrchr((const char*) s->env[i], '=') - s->env[i]))))
+			&& (size == \
+				((int)(ft_strrchr((const char*) s->env[i], '=') - s->env[i]))))
 		{
 			j = -1;
 			break ;
@@ -100,7 +101,8 @@ int	ft_unset(t_struc *s)
 			ft_find_in_env_unset(s, index);
 		else if (result == -1 && ok == 0)
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n", s->pars[index]);
+			printf("minishell: unset: `%s': not a valid identifier\n", \
+				s->pars[index]);
 			ok = 1;
 		}
 		index++;
