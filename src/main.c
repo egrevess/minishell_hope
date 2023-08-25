@@ -6,7 +6,7 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/08/08 19:36:23 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/25 17:10:10 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ void	execut2(int sig)
 
 int	main(int argc, char **argv, char **env)
 {
-	char *str;
-	int	result;
+	char	*str;
+	int		result;
 	t_struc	s;
 	t_pipe	p;
 	//pid_t	pid;
 	//char *arg;
 	int		index;
-	int i = 1;
-	int	result_bis;
-	index = 0;
-
+	int		i = 1;
+	int		result_bis;
 	(void) argv;
+
+	index = 0;
 	put_head();
 	p.nb_pipe = 0;
 	//signal(SIGINT, execut);
@@ -57,21 +57,21 @@ int	main(int argc, char **argv, char **env)
 	if (argc == 1)
 	{
 		while (42)
-    	{
-    		str = readline("burtonshell >$ ");
+		{
+			str = readline("burtonshell >$ ");
 			if (!str)
 				ft_exit();
 			add_history(str);
 			if (index == 0)
 			{
-				result = ft_init_env(&s,env);
+				result = ft_init_env(&s, env);
 				s.path = NULL;
 				if (result == 0)
 					exit (EXIT_FAILURE);
 			}
 			s.pars = ft_parse(str, &s);
 			s.pars = ft_pipe(&s, &p);
-			result_bis = ft_pipes(&s,&p);
+			result_bis = ft_pipes(&s, &p);
 			ft_sub_dollar(&s);
 			s.pars = ft_parse_quotes(&s);
 			ft_find_pdw(&s);

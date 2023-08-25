@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:05:38 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/03/14 13:29:03 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:28:28 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../Includes/minishell.h"
 

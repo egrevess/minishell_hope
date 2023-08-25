@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:30:14 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:31 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 15:59:33 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_check_export(char *par, t_struc *s)
 	s->checker_export = 0;
 	while (par[i] && s->checker_export == 0)
 	{
-		if ((par[i] <= '9' && par[i] >= '0' && i !=0)
+		if ((par[i] <= '9' && par[i] >= '0' && i != 0)
 			|| (par[i] <= 'z' && par[i] >= 'a')
 			|| (par[i] <= 'Z' && par[i] >= 'A')
 			|| par[i] == '_')

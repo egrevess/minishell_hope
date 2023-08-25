@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_sort_par.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:45:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:13 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:01:22 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_copy_env(t_struc	*s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	s->copy_env = malloc (sizeof(*s->copy_env) * (s->lenght_env + 1));
@@ -29,10 +29,10 @@ void	ft_copy_env(t_struc	*s)
 	s->copy_env[i] = NULL;
 }
 
-void	ft_swap(int n,int a, t_struc *s)
+void	ft_swap(int n, int a, t_struc *s)
 {
-	char *temp;
-	
+	char	*temp;
+
 	temp = s->copy_env[n];
 	s->copy_env[n] = s->copy_env[a];
 	s->copy_env[a] = temp;
@@ -85,14 +85,14 @@ void	ft_sort_env(t_struc *s)
 		printf("declare -x ");
 		while (s->copy_env[i][j] != '=')
 		{
-			printf("%c",s->copy_env[i][j]);
+			printf("%c", s->copy_env[i][j]);
 			j++;
 		}
 		printf("=\"");
 		j++;
 		while (s->copy_env[i][j])
 		{
-			printf("%c",s->copy_env[i][j]);
+			printf("%c", s->copy_env[i][j]);
 			j++;
 		}
 		printf("\"\n");

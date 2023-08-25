@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:44:22 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/02/21 17:09:51 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:27:51 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

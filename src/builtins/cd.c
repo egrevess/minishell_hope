@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:56:20 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:01 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 15:58:57 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	send_path(char *path, t_struc *s)
 {
-	char *temp;
+	char	*temp;
 
 	temp = ft_find_pdw(s);
 	if (path[0] == '~')
@@ -32,18 +32,18 @@ void	send_path(char *path, t_struc *s)
 			g_output = 1;
 		}
 	}
-	else 
+	else
 		exit(EXIT_FAILURE);
 }
 
-char **ft_arrayjoin_oldpwd(t_struc *s, char *oldpwd)
+char	**ft_arrayjoin_oldpwd(t_struc *s, char *oldpwd)
 {
 	char	**temp;
 	int		i;
 
 	s->lenght_env++;
 	if (!oldpwd || !s->env)
-		exit (EXIT_FAILURE); //pas sure que ce soit la bonne manière de protéger 
+		exit (EXIT_FAILURE);
 	temp = malloc(sizeof(*temp) * ((int) s->lenght_env + 1));
 	if (!temp)
 		exit (EXIT_FAILURE);
@@ -59,22 +59,21 @@ char **ft_arrayjoin_oldpwd(t_struc *s, char *oldpwd)
 	return (temp);
 }
 
-
 void	change_value_env(t_struc *s, char *temp)
 {
-	int i;
+	int	i;
 	int	check;
 
 	i = 0;
 	check = 0;
 	while (s->env[i])
 	{
-		if (ft_strncmp(s->env[i], "PWD" , (size_t) 3) == 0) // rajouter un check pour la longueur du parametre 
+		if (ft_strncmp(s->env[i], "PWD", (size_t) 3) == 0) // rajouter un check pour la longueur du parametre 
 		{
 			free(s->env[i]);
 			s->env[i] = ft_strjoin("PWD=", ft_find_pdw(s));
 		}
-		else if(ft_strncmp(s->env[i], "OLDPWD" , (size_t) 6) == 0) //meme chose ici
+		else if (ft_strncmp(s->env[i], "OLDPWD", (size_t) 6) == 0) //meme chose ici
 		{
 			free(s->env[i]);
 			s->env[i] = ft_strjoin("OLDPWD=", temp);
@@ -88,8 +87,8 @@ void	change_value_env(t_struc *s, char *temp)
 
 void	ft_cd(t_struc *s)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	if (s->size_pars == 1)
 	{

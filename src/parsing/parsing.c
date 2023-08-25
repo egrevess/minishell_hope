@@ -6,7 +6,7 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/08/14 13:18:57 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:40:06 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>		// A retirer !!!
 
-char    **ft_parse(char *str, t_struc *s)
+char	**ft_parse(char *str, t_struc *s)
 {
 	/*
 	char **line;
@@ -26,20 +26,20 @@ char    **ft_parse(char *str, t_struc *s)
 		printf("%s\n", line[i]);
 		i++;
 	}*/
-	int i =0;
+	int		i = 0;
 	char	*delimiter = NULL;
-	s->heredoc_content = "\0";
 
+	s->heredoc_content = "\0";
 	while (str[i])
 	{
-		if (str[i] == '<' && str[i+1] == '<')
-			{
-				if (str[i+2] == ' ')
-					delimiter = ft_substr(str, i+3, ft_strlen(str));
-				else
-					delimiter = ft_substr(str, i+2, ft_strlen(str));
-				break;
-			}
+		if (str[i] == '<' && str[i + 1] == '<')
+		{
+			if (str[i + 2] == ' ')
+				delimiter = ft_substr(str, i + 3, ft_strlen(str));
+			else
+				delimiter = ft_substr(str, i + 2, ft_strlen(str));
+			break ;
+		}
 		i++;
 	}
 	if (delimiter)
@@ -85,7 +85,7 @@ static int	check_only_quo(char *str, char c)
 	char	d;
 	int		two;
 	int		one;
-	
+
 	i = 0;
 	two = 0;
 	one = 0;
@@ -101,7 +101,7 @@ static int	check_only_quo(char *str, char c)
 		{
 			if (two == 0 || (two % 2 == 0 && two > 1))
 				two = 0;
-			else 
+			else
 				return (1);
 			one++;
 		}
@@ -109,7 +109,7 @@ static int	check_only_quo(char *str, char c)
 		{
 			if (one == 0 || (one % 2 == 0 && one != 1))
 				one = 0;
-			else 
+			else
 				return (1);
 			two++;
 		}
@@ -159,14 +159,14 @@ static	int	ft_check_other(const char *s, char c, char d)
 	}
 	if (two != 0)
 		return (1);
-	else 
+	else
 		return (0);
 }
 
 static int	ft_check_quotes(char *s)
 {
 	int	i;
-	
+
 	i = 0;
 	while (s[i])
 	{
@@ -177,10 +177,10 @@ static int	ft_check_quotes(char *s)
 	return (0);
 }
 
-static char *ft_del_quotes(char	*s, char c, char d)
+static	char	*ft_del_quotes(char	*s, char c, char d)
 {
-	int	i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	temp = NULL;
@@ -196,7 +196,7 @@ static char *ft_del_quotes(char	*s, char c, char d)
 				if (temp == NULL)
 				{
 					//printf("before temp i = %d\n", i);
-					temp = ft_substr(s , i, 1);
+					temp = ft_substr(s, i, 1);
 					//printf("after null %s\n", temp);
 					//printf("after temp i = %d\n", i);
 				}
@@ -204,14 +204,13 @@ static char *ft_del_quotes(char	*s, char c, char d)
 				{
 					//printf("before temp i = %d\n", i);
 					//printf("before temp %s\n", temp);
-					temp = ft_strjoin(temp, ft_substr(s , i, 1));
+					temp = ft_strjoin(temp, ft_substr(s, i, 1));
 					//printf("after temp %s\n", temp);
 					//printf("after temp i = %d\n", i);
 				}
 				i++;
 			}
 			i++;
-
 		}
 		else if (s[i] == d)
 		{
@@ -219,9 +218,9 @@ static char *ft_del_quotes(char	*s, char c, char d)
 			while (s[i] != d)
 			{
 				if (temp == NULL)
-					temp = ft_substr(s , i, i);
-				else 
-					temp = ft_strjoin(temp, ft_substr(s , i, 1));
+					temp = ft_substr(s, i, i);
+				else
+					temp = ft_strjoin(temp, ft_substr(s, i, 1));
 				i++;
 			}
 			i++;
@@ -229,16 +228,16 @@ static char *ft_del_quotes(char	*s, char c, char d)
 		else
 		{
 			if (temp == NULL)
-				temp = ft_substr(s , i, 1);
-			else 
-				temp = ft_strjoin(temp, ft_substr(s , i, 1));
+				temp = ft_substr(s, i, 1);
+			else
+				temp = ft_strjoin(temp, ft_substr(s, i, 1));
 			i++;
 		}
 		//printf("%s\n", temp);
 	}
 	return (temp);
 }
-	
+
 char	**ft_parse_quotes(t_struc *s)
 {
 	int	i;
@@ -249,7 +248,8 @@ char	**ft_parse_quotes(t_struc *s)
 	while (s->pars[i])
 	{
 		//printf("s->pars[i]%s\n",s->pars[i]);
-		if ((s->pars[i][0] == '\'' || s->pars[i][0] == '\"') && check_only_quo(s->pars[i], s->pars[i][0]) == 0)
+		if ((s->pars[i][0] == '\'' || s->pars[i][0] == '\"')
+			&& check_only_quo(s->pars[i], s->pars[i][0]) == 0)
 		{
 			//printf("s->pars[i]%s\n",s->pars[i]);
 			if (!s->pars[i + 1])
@@ -263,7 +263,7 @@ char	**ft_parse_quotes(t_struc *s)
 			return (NULL);
 		}
 		else if (ft_check_quotes(s->pars[i]) == 1)
-			s->pars[i] = ft_del_quotes(s->pars[i] , '\'', '\"');
+			s->pars[i] = ft_del_quotes(s->pars[i], '\'', '\"');
 		//printf("%s\n",s->pars[i]);
 		i++;
 	}

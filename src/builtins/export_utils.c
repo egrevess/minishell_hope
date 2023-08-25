@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:31:33 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:27 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:50:32 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ int	ft_find_in_env_export(t_struc *s, int index)
 	if (s->checker_export == 1)
 	{
 		s->pars[index] = ft_change_pars_export(s, index);
-		temp_pars = ft_copy_pars_after_equal(s,index);
+		temp_pars = ft_copy_pars_after_equal(s, index);
 	}
-	size = ft_strrchr((const char*) s->pars[index], '=') - s->pars[index];
+	size = ft_strrchr((const char *) s->pars[index], '=') - s->pars[index];
 	while (s->env[i])
 	{
-		if (ft_strncmp(s->env[i], s->pars[index] , (size_t) size) == 0)
+		if (ft_strncmp(s->env[i], s->pars[index], (size_t) size) == 0)
 		{
 			j = -1;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -101,7 +101,7 @@ int	ft_find_in_env_export(t_struc *s, int index)
 		free(s->env[i]);
 		if (s->checker_export != 1)
 			s->env[i] = ft_strdup(s->pars[index]);
-		else 
+		else
 		{
 			s->env[i] = ft_strjoin(temp_env, temp_pars);
 			free(temp_env);

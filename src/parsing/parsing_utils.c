@@ -6,7 +6,7 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/17 17:04:23 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:50:06 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_find_in_env(t_struc *s, int i)
 	int		x;
 
 	len = (int) ft_strlen(s->env[i]);
-	index = (int)(ft_strrchr((const char*) s->env[i], '=') - s->env[i]) + 1;
+	index = (int)(ft_strrchr((const char *) s->env[i], '=') - s->env[i]) + 1;
 	temp = malloc(sizeof(*temp) * (len - index + 1));
 	if (!temp)
 		exit(EXIT_FAILURE);
@@ -50,7 +50,8 @@ int	ft_find_in_env_dollar(t_struc *s, int index)
 	while (s->env[i])
 	{
 		if (ft_strncmp(s->env[i], par, (size_t)(s->size_second_pars - 1)) == 0
-			&& (s->size_second_pars - 1) == (int) (ft_strrchr((const char*) s->env[i], '=') - s->env[i]))
+			&& (s->size_second_pars - 1) ==
+			(int)(ft_strrchr((const char*) s->env[i], '=') - s->env[i]))
 		{
 			check = i;
 			break ;
@@ -113,11 +114,11 @@ void	ft_sub_dollar(t_struc *s)
 		check_double_quotes(s, index);
 		if (s->pars[index][0] == '$')
 		{
-			pass = ft_find_in_env_dollar(s,index);
+			pass = ft_find_in_env_dollar(s, index);
 			if (pass != -1)
 			{
 				free(s->pars[index]);
-				s->pars[index] = ft_find_in_env(s,pass);
+				s->pars[index] = ft_find_in_env(s, pass);
 			}
 		}
 		index++;

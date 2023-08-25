@@ -6,7 +6,7 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/14 13:38:19 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:52:28 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	ft_builtins(t_struc *s)
 		s->size_first_pars = (int) ft_strlen(s->pars[0]);
 		if (ft_strncmp(s->pars[0], "env", (size_t) 3) == 0 && (int) ft_strlen(s->pars[0]) == 3)
 			ft_printf_env(s);
-		else if(ft_strncmp(s->pars[0], "pwd", (size_t) 3) == 0 && (int) ft_strlen(s->pars[0]) == 3)
+		else if (ft_strncmp(s->pars[0], "pwd", (size_t) 3) == 0 && (int) ft_strlen(s->pars[0]) == 3)
 		{
 			if (s->pwd)
 			{
 				g_output = 0;
-				printf("%s\n",s->pwd);
+				printf("%s\n", s->pwd);
 			}
-			else 
+			else
 				g_output = 1;
 		}
 		else if (ft_strncmp(s->pars[0], "echo", (size_t) 4) == 0 && (int) ft_strlen(s->pars[0]) == 4)
@@ -51,7 +51,7 @@ void	ft_builtins(t_struc *s)
 			ft_sort_env(s);
 		else if (ft_strncmp(s->pars[0], "$?", (size_t) 2) == 0)
 			ft_dollar(s);
-		else 
+		else
 			g_output = ft_execve(s);
 	}
 	else if (s->size_pars > 1 && !ft_strncmp(s->heredoc_content, "\0", 1))

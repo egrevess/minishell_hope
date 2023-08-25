@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:33:19 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/05/15 10:06:20 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:26:49 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_printf_env(t_struc *s)
 
 int	ft_init_env(t_struc *s, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	s->env = malloc (sizeof(*s->env) * (240));
@@ -51,19 +51,20 @@ int	ft_init_env(t_struc *s, char **env)
 int	ft_in_env(t_struc *s, char *var)
 {
 	int	i;
-	int check;
-	int size;
+	int	check;
+	int	size;
 
 	i = 0;
 	check = -1;
 	size = (int) ft_strlen(var);
 	while (s->env[i])
 	{
-		if (ft_strncmp(s->env[i], var , (size_t) (size - 1)) == 0
-			&& (size) == (int) (ft_strrchr((const char*) s->env[i], '=') - s->env[i]))
+		if (ft_strncmp(s->env[i], var, (size_t)(size - 1)) == 0
+			&& (size) == (int)(ft_strrchr((const char*) s->env[i], '=')
+			- s->env[i]))
 		{
 			check = i;
-			break;
+			break ;
 		}
 		i++;
 	}

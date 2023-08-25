@@ -6,7 +6,7 @@
 /*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:56:52 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/17 17:05:31 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/08/25 16:40:36 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_echo_option(char **par)
 	i = 1;
 	while (par[i])
 	{
-		if (ft_strncmp(par[i], "-n", (size_t) 2) == 0 && (int) ft_strlen(par[i]) == 2)
+		if (ft_strncmp(par[i], "-n", (size_t) 2) == 0
+			&& (int) ft_strlen(par[i]) == 2)
 			check_nl++;
 		else
 			break ;
@@ -52,11 +53,12 @@ void	ft_echo(t_struc *s)
 		}
 		if (s->pars[i][0] == '$' && ft_find_in_env_dollar(s, index) == -1)
 			printf("");
-		if (ft_strncmp(s->pars[i], "$?", (size_t) 2) == 0 && (int) ft_strlen(s->pars[i]) == 2)
+		if (ft_strncmp(s->pars[i], "$?", (size_t) 2) == 0
+			&& (int) ft_strlen(s->pars[i]) == 2)
 			printf("%d", g_output);
 		else if (s->pars[i])
 			printf("%s", s->pars[i]);
-		if (s->pars[i + 1] || s->echo_quotes == 1)//&& ft_find_in_env_dollar(s, index) != -1)
+		if (s->pars[i + 1] || s->echo_quotes == 1) //&& ft_find_in_env_dollar(s, index) != -1)
 			printf(" ");
 		i++;
 	}
