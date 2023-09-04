@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:49:41 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/03/16 16:35:12 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/09/04 13:36:38 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_dollar(t_struc *s)
 {
 	(void) s;
-	//manque une protection
 	printf("minishell: %d: command not found\n", g_output);
 	g_output = 127;
 }

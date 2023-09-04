@@ -6,7 +6,7 @@
 #    By: viburton <viburton@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/04 14:40:32 by viburton          #+#    #+#              #
-#    Updated: 2023/04/03 12:13:41 by viburton         ###   ########.fr        #
+#    Updated: 2023/09/04 13:30:50 by viburton         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS = ft_isalpha.c ft_isdigit.c \
 	ft_lstdelone.c ft_lstclear.c \
 	ft_lstadd_back.c ft_lstadd_front.c \
 	ft_lstiter.c ft_lstlast.c \
-	ft_lstmap.c \
+	ft_lstmap.c ft_split_utils.c ft_split_utils2.c\
 
 OBJS = $(SRCS:.c=.o)
 

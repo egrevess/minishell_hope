@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:18:36 by victorburto       #+#    #+#             */
-/*   Updated: 2023/08/25 16:46:59 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/04 14:53:42 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@ void	execute_with_heredoc(t_struc *s, char *command, char *heredoc_content)
 {
 	int		pipefd[2];
 	char	*com[2];
-	pid_t	pid = fork();
+	pid_t	pid;
 
+	pid = fork();
 	pipe(pipefd);
 	com[0] = command;
 	com[1] = heredoc_content;
 	if (pid == 0)
 	{
-		// Enfant
 		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
 		close(pipefd[0]);
-		// Exécute la commande
 		ft_execve_pipe(s, com);
 		exit(0);
 	}
 	else if (pid > 0)
 	{
-		// Parent
 		close(pipefd[0]);
 		write(pipefd[1], heredoc_content, ft_strlen(heredoc_content));
 		close(pipefd[1]);

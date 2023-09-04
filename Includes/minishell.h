@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/08/17 16:50:36 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/04 16:16:36 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef struct s_struc
 	char	**env;
 	char	**path;
 	char	**copy_env;
-	int		size_first_pars; // pour les builtins comme ca je peux comparer et utiliser la longueur du seul pars
+	int		size_first_pars;
 	int		size_second_pars;
-	int		size_pars;// le nombre de pars 
-	int		lenght_env; // variable utile pour ajouter des nouvelles varibales 
+	int		size_pars;
+	int		lenght_env;
 	char	*pwd;
 	char	**history;
 	int		checker_export;
@@ -61,7 +61,7 @@ typedef struct s_pipe
 
 typedef struct s_command
 {
-	char		*command;
+	char				*command;
 	struct t_command	*next;
 }		t_command;
 
@@ -96,7 +96,7 @@ void	ft_dollar(t_struc *s);
 void	ft_sub_dollar(t_struc *s);
 int		ft_find_in_env_dollar(t_struc *s, int index);
 int		ft_in_env(t_struc *s, char *var);
-void	pipes(t_struc *s/*char *in, char *out*/);
+void	pipes(t_struc *s);
 int		ft_execve_pipe(t_struc *s, char **command);
 void	parse_and_execute(t_struc *s, t_list *c);
 void	heredoc_handle(t_struc *s, char *delimiter);

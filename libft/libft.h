@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:32:14 by viburton          #+#    #+#             */
-/*   Updated: 2022/10/06 15:03:45 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:30:30 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }		t_list;
+
+typedef struct s_struct
+{
+	size_t	*s;
+	size_t	*e;
+}		t_struct;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -65,5 +71,7 @@ t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_lstsize(t_list *lst);
+size_t	check_str(char const *s, char c);
+char	**ft_create_str(char **spl, const char *s, char c, int i);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:56:20 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 15:58:57 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/04 15:11:44 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	change_value_env(t_struc *s, char *temp)
 	check = 0;
 	while (s->env[i])
 	{
-		if (ft_strncmp(s->env[i], "PWD", (size_t) 3) == 0) // rajouter un check pour la longueur du parametre 
+		if (ft_strncmp(s->env[i], "PWD", (size_t) 3) == 0)
 		{
 			free(s->env[i]);
 			s->env[i] = ft_strjoin("PWD=", ft_find_pdw(s));
 		}
-		else if (ft_strncmp(s->env[i], "OLDPWD", (size_t) 6) == 0) //meme chose ici
+		else if (ft_strncmp(s->env[i], "OLDPWD", (size_t) 6) == 0)
 		{
 			free(s->env[i]);
 			s->env[i] = ft_strjoin("OLDPWD=", temp);
