@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/08/25 17:10:10 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 12:03:27 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **env)
 				}
 				else if (result_bis != 1 && p.nb_pipe != 0)
 				{
-					pipes(&s);
+					pipes(&s, ft_count_pipe1(&s) + 1);
 				}	
 			}
 			index++;

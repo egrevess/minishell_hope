@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:56:16 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 18:55:11 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 11:45:52 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,82 +95,4 @@ int	ft_count_pipe1(t_struc *s) //METTRE DANS PIPE.C LE NOUVEAU FT_COUNT_PIPE (QU
 	}
 	s->nb_pipe = j;
 	return (j);
-}
-
-void	pipes(t_struc *s)
-{
-	int		num_commands = (ft_count_pipe1(s) + 1);
-	char	*commands[num_commands];
-	int		fd[num_commands - 1][2];
-	pid_t	pid[num_commands];
-	int		i = 0;
-	t_list	*c = init_list(s, NULL);
-
-	while (i < num_commands)
-	{
-		commands[i] = ft_strdup(c->content);
-		c = c->next;
-		i ++;
-	}
-	i = 0;
-	while (i < num_commands)
-	{
-		if (pipe(fd[i]) == -1)
-		{
-			perror("pipe");
-			exit(EXIT_FAILURE);
-		}
-		pid[i] = fork();
-		if (pid[i] == -1)
-		{
-			perror("fork");
-			exit(EXIT_FAILURE);
-		}
-		else if (pid[i] == 0)
-		{
-			if (i == 0)
-			{
-				dup2(fd[i][1], STDOUT_FILENO);
-				close(fd[i][0]);
-				close(fd[i][1]);
-			}
-			else if (i == num_commands - 1)
-			{
-				dup2(fd[i - 1][0], STDIN_FILENO);
-				close(fd[i - 1][0]);
-				close(fd[i - 1][1]);
-			}
-			else
-			{
-				dup2(fd[i][1], STDOUT_FILENO);
-				dup2(fd[i - 1][0], STDIN_FILENO);
-				close(fd[i][0]);
-				close(fd[i][1]);
-				close(fd[i - 1][0]);
-				close(fd[i - 1][1]);
-			}
-			ft_execve_pipe(s, ft_split(commands[i], ' '));
-			perror("ft_execve_pipe");
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			if (i > 0)
-			{
-				close(fd[i - 1][0]);
-				close(fd[i - 1][1]);
-			}
-		}
-		i ++;
-	}
-	close(fd[s->nb_pipe - 1][1]); // Ferme l'extrémité d'écriture du dernier pipe
-	pid_t	wpid;
-	int		status;
-	while ((wpid = wait(&status)) > 0);
-	i = 0;
-	while (i < num_commands)
-	{
-		free(commands[i]);
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/04 16:16:36 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:03:11 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,11 @@ void	ft_dollar(t_struc *s);
 void	ft_sub_dollar(t_struc *s);
 int		ft_find_in_env_dollar(t_struc *s, int index);
 int		ft_in_env(t_struc *s, char *var);
-void	pipes(t_struc *s);
+void	pipes(t_struc *s, int num_commands);
 int		ft_execve_pipe(t_struc *s, char **command);
 void	parse_and_execute(t_struc *s, t_list *c);
 void	heredoc_handle(t_struc *s, char *delimiter);
+t_list	*init_list(t_struc *s, t_list *c);
+int	ft_count_pipe1(t_struc *s);
 
 #endif
