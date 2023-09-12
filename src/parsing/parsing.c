@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/05 15:26:05 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 10:44:31 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,45 +66,6 @@ static char	**ft_array_del(char **s, int find)
 	index = 0;
 	ft_free_array(s, ft_len_tab(s) - 1);
 	return (temp);
-}
-
-static int	check_only_quo(char *str, char c)
-{
-	int		i;	
-	char	d;
-	int		two;
-	int		one;
-
-	i = 0;
-	two = 0;
-	one = 0;
-	if (c == '\'')
-		d = '\"';
-	else
-		d = '\'';
-	while (str[i])
-	{
-		if (str[i] != c && str[i] != d)
-			return (1);
-		if (str[i] == c)
-		{
-			if (two == 0 || (two % 2 == 0 && two > 1))
-				two = 0;
-			else
-				return (1);
-			one++;
-		}
-		else if (str[i] == d)
-		{
-			if (one == 0 || (one % 2 == 0 && one != 1))
-				one = 0;
-			else
-				return (1);
-			two++;
-		}
-		i++;
-	}
-	return (0);
 }
 
 static	int	ft_check_other(const char *s, char c, char d)
@@ -222,7 +183,7 @@ char	**ft_parse_quotes(t_struc *s)
 	while (s->pars[i])
 	{
 		if ((s->pars[i][0] == '\'' || s->pars[i][0] == '\"')
-			&& check_only_quo(s->pars[i], s->pars[i][0]) == 0)
+			&& check_only_quo(s->pars[i], s->pars[i][0], 0, 0) == 0)
 		{
 			if (!s->pars[i + 1])
 				s->echo_quotes = 1;

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/05 13:00:24 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 10:07:19 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	pipes_utils_1(t_struc *s, char **commands, int num_commands, int i)
 {
 	t_list	*c;
 
-	c = init_list(s, NULL);
+	c = init_list(s, NULL, 0);
 	while (i < num_commands)
 	{
 		commands[i] = ft_strdup(c->content);

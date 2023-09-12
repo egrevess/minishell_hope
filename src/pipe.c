@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:56:16 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/05 11:45:52 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 10:06:49 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int	ft_pipes(t_struc *s, t_pipe *p)
 	return (0);
 }
 
-t_list	*init_list(t_struc *s, t_list *c)
+t_list	*init_list(t_struc *s, t_list *c, int i)
 {
-	int		i;
 	char	*command;
 
-	i = 0;
 	command = NULL;
 	while (s->pars[i])
 	{
@@ -67,7 +65,6 @@ int	ft_execve_pipe(t_struc *s, char **command)
 	}
 	while (s->path[i])
 	{
-		//printf("s->path[i]= %s <=====> command[0]= %s <=====> command[1] = %s\n ",s->path[i],command[0], command[1]);
 		if (access(ft_strjoin(ft_strjoin(s->path[i], "/"),
 					command[0]), X_OK) == 0)
 			return (execve(ft_strjoin(ft_strjoin(s->path[i], "/"),
@@ -80,7 +77,7 @@ int	ft_execve_pipe(t_struc *s, char **command)
 	return (1);
 }
 
-int	ft_count_pipe1(t_struc *s) //METTRE DANS PIPE.C LE NOUVEAU FT_COUNT_PIPE (QUI EST UNE NOUVELLE FONCTION )
+int	ft_count_pipe1(t_struc *s)
 {
 	int	i;
 	int	j;
