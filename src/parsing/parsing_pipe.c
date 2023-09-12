@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:52:24 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/12 12:05:35 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:14:42 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	len_pars(char **pars)
 	}
 	return (i);
 }
-
+/*
 char	**ft_pipe(t_struc *s, t_pipe *p)
 {
 	int		i;
@@ -145,3 +145,4 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 	else
 		return (s->pars);
 }
+*/
