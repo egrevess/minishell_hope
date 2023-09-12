@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:52:24 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/05 15:38:07 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:05:35 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,67 +66,6 @@ int	len_pars(char **pars)
 	return (i);
 }
 
-int	ft_count_pipe(char **line, t_pipe *p)
-{
-	int	i;
-	int	j;
-	int	nb;
-	int	check;
-	int	quotes;
-	int	two;
-
-	i = 0;
-	nb = 0;
-	quotes = 0;
-	while (line[i])
-	{
-		check = -2;
-		j = 0;
-		two = 0;
-		while (line[i][j])
-		{
-			if (check != -2 && line[i][j - 1] == '|' && line[i][j] != '|' && quotes == 0)
-				nb++;
-			else if (line[i][j] == '\'' && (two == 0 || two == 1))
-			{
-				if (quotes == 0)
-				{
-					two = 1;
-					quotes = 1;
-				}
-				else if (quotes == 1)
-				{
-					two = 0;
-					quotes = 0;
-				}
-			}
-			else if (line[i][j] == '\"' && (two == 0 || two == 2))
-			{
-				if (quotes == 0)
-				{
-					two = 2;
-					quotes = 1;
-				}
-				else if (quotes == 1)
-				{
-					two = 0;
-					quotes = 0;
-				}
-			}
-			else if (line[i][j] == '|' && ft_strlen(line[i]) > 1 && quotes == 0)
-			{
-				if (check != j - 1 && j != 0)
-					nb++;
-				check = j;
-			}
-			j++;
-		}
-		i++;
-	}
-	p->nb_pipe = nb;
-	return (nb);
-}
-
 char	**ft_pipe(t_struc *s, t_pipe *p)
 {
 	int		i;
@@ -141,7 +80,7 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 	i = 0;
 	index = 0;
 	s->size_pars = len_pars(s->pars);
-	nb_pipe = ft_count_pipe(s->pars, p);
+	nb_pipe = ft_count_pipe(s->pars, p, 0, 0);
 	if (nb_pipe > 0)
 	{
 		printf("size pars = %d\n", s->size_pars);
