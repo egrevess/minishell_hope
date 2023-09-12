@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:52:24 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/04 13:09:06 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:38:07 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	ft_count_pipe(char **line, t_pipe *p)
 	int	j;
 	int	nb;
 	int	check;
-	int	len;
 	int	quotes;
 	int	two;
 
@@ -83,7 +82,6 @@ int	ft_count_pipe(char **line, t_pipe *p)
 	{
 		check = -2;
 		j = 0;
-		len = ft_strlen(line[i]);
 		two = 0;
 		while (line[i][j])
 		{
@@ -115,7 +113,7 @@ int	ft_count_pipe(char **line, t_pipe *p)
 					quotes = 0;
 				}
 			}
-			else if (line[i][j] == '|' && len > 1 && quotes == 0)
+			else if (line[i][j] == '|' && ft_strlen(line[i]) > 1 && quotes == 0)
 			{
 				if (check != j - 1 && j != 0)
 					nb++;
@@ -203,14 +201,6 @@ char	**ft_pipe(t_struc *s, t_pipe *p)
 		}
 		temp[index] = NULL;
 		index = 0;
-		/*
-		while (temp[index])
-		{
-			printf("temp = %s\n", temp[index]);
-			index++;
-		}
-		*/
-		//free(s->pars);
 		return (temp);
 	}
 	else

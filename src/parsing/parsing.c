@@ -3,32 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/08/25 16:40:06 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 15:26:05 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minishell.h"
 
-#include <stdio.h>		// A retirer !!!
-
 char	**ft_parse(char *str, t_struc *s)
 {
-	/*
-	char **line;
-	int i =0;
-		
-	line = ft_split(str, ' ');
-	while (line[i])
-	{
-		printf("%s\n", line[i]);
-		i++;
-	}*/
-	int		i = 0;
-	char	*delimiter = NULL;
+	int		i;
+	char	*delimiter;
 
+	i = 0;
+	delimiter = NULL;
 	s->heredoc_content = "\0";
 	while (str[i])
 	{
@@ -58,7 +48,6 @@ static char	**ft_array_del(char **s, int find)
 	int		size;
 
 	size = ft_len_tab(s) - 1;
-	//printf("size = %d\n", size);
 	temp = malloc(sizeof(*temp) * (size + 1));
 	if (!temp)
 		exit (EXIT_FAILURE);
@@ -189,25 +178,12 @@ static	char	*ft_del_quotes(char	*s, char c, char d)
 		if (s[i] == c)
 		{
 			i++;
-			//printf("%c\n", s[i]);
 			while (s[i] != c)
 			{
-				//printf("c = %c\n", s[i]);
 				if (temp == NULL)
-				{
-					//printf("before temp i = %d\n", i);
 					temp = ft_substr(s, i, 1);
-					//printf("after null %s\n", temp);
-					//printf("after temp i = %d\n", i);
-				}
 				else
-				{
-					//printf("before temp i = %d\n", i);
-					//printf("before temp %s\n", temp);
 					temp = ft_strjoin(temp, ft_substr(s, i, 1));
-					//printf("after temp %s\n", temp);
-					//printf("after temp i = %d\n", i);
-				}
 				i++;
 			}
 			i++;
@@ -233,7 +209,6 @@ static	char	*ft_del_quotes(char	*s, char c, char d)
 				temp = ft_strjoin(temp, ft_substr(s, i, 1));
 			i++;
 		}
-		//printf("%s\n", temp);
 	}
 	return (temp);
 }
@@ -244,14 +219,11 @@ char	**ft_parse_quotes(t_struc *s)
 
 	i = 0;
 	s->echo_quotes = 0;
-	//printf("-----------\n");
 	while (s->pars[i])
 	{
-		//printf("s->pars[i]%s\n",s->pars[i]);
 		if ((s->pars[i][0] == '\'' || s->pars[i][0] == '\"')
 			&& check_only_quo(s->pars[i], s->pars[i][0]) == 0)
 		{
-			//printf("s->pars[i]%s\n",s->pars[i]);
 			if (!s->pars[i + 1])
 				s->echo_quotes = 1;
 			s->pars = ft_array_del(s->pars, i);
@@ -264,7 +236,6 @@ char	**ft_parse_quotes(t_struc *s)
 		}
 		else if (ft_check_quotes(s->pars[i]) == 1)
 			s->pars[i] = ft_del_quotes(s->pars[i], '\'', '\"');
-		//printf("%s\n",s->pars[i]);
 		i++;
 	}
 	return (s->pars);

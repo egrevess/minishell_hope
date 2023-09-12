@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_sort_par.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:45:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 16:01:22 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 15:09:05 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,33 +52,8 @@ int	ft_compare(char *s1, char *s2)
 	return (0);
 }
 
-void	ft_sort_env(t_struc *s)
+static void	sortenv_utils(t_struc *s, int i, int j)
 {
-	int		i;
-	int		j;
-	int		n;
-
-	n = 0;
-	ft_copy_env(s);
-	if (!s->copy_env)
-	{
-		g_output = 1;
-		exit(EXIT_FAILURE);
-	}
-	while (n < s->lenght_env - 1)
-	{
-		i = n + 1;
-		while (i < s->lenght_env)
-		{
-			if (ft_compare(s->copy_env[n], s->copy_env[i]) > 0)
-			{
-				ft_swap(n, i, s);
-			}
-			i++;
-		}
-		n++;
-	}
-	i = 0;
 	while (s->copy_env[i])
 	{
 		j = 0;
@@ -100,4 +75,32 @@ void	ft_sort_env(t_struc *s)
 	}
 	g_output = 0;
 	ft_free_array(s->copy_env, i - 1);
+}
+
+void	ft_sort_env(t_struc *s)
+{
+	int		i;
+	int		j;
+
+	j = 0;
+	ft_copy_env(s);
+	if (!s->copy_env)
+	{
+		g_output = 1;
+		exit(EXIT_FAILURE);
+	}
+	while (j < s->lenght_env - 1)
+	{
+		i = j + 1;
+		while (i < s->lenght_env)
+		{
+			if (ft_compare(s->copy_env[j], s->copy_env[i]) > 0)
+			{
+				ft_swap(j, i, s);
+			}
+			i++;
+		}
+		j++;
+	}
+	sortenv_utils(s, 0, 0);
 }

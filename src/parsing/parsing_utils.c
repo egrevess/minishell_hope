@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 16:50:06 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 14:58:24 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_find_in_env_dollar(t_struc *s, int index)
 	par = malloc(sizeof(*par) * (s->size_second_pars));
 	if (!par)
 		exit (EXIT_FAILURE);
-	par = ft_memcpy(par, &s->pars[index][1], (size_t)(s->size_second_pars - 1)); //cherche la dernière occurence de $
+	par = ft_memcpy(par, &s->pars[index][1], (size_t)(s->size_second_pars - 1));
 	i = 0;
 	while (s->env[i])
 	{
@@ -61,19 +61,13 @@ int	ft_find_in_env_dollar(t_struc *s, int index)
 	return (check);
 }
 
-void	check_double_quotes(t_struc *s, int index)
+static void	check_dbqu_utils(t_struc *s, int index, int i, char **par)
 {
-	int		i;
-	int		check;
-	int		len;
 	int		reps;
-	char	**par;
+	int		check;
 
 	check = 0;
 	reps = 0;
-	i = 0;
-	len = (int) ft_strlen(s->pars[index]);
-	par = NULL;
 	while (s->pars[index][i] == '\"' )
 	{
 		reps++;
@@ -89,17 +83,27 @@ void	check_double_quotes(t_struc *s, int index)
 		check++;
 		i++;
 	}
-	if (check == reps && i == len)
+	if (check == reps && i == (int)ft_strlen(s->pars[index]))
 		par = ft_split(s->pars[index], '\"');
 	else if (check != reps)
 		printf("error : double quote");
+}
+
+void	check_double_quotes(t_struc *s, int index)
+{
+	int		i;
+	char	**par;
+
+	i = 0;
+	par = NULL;
+	check_dbqu_utils(s, index, i, par);
 	if (!par)
 		return ;
 	if (ft_len_tab(par) == 1)
 	{
 		s->pars[index] = ft_strdup(par[0]);
 		ft_free_array(par, ft_len_tab(par) - 1);
-	}	
+	}
 }
 
 void	ft_sub_dollar(t_struc *s)

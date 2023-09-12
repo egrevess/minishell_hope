@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:00:01 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/17 17:28:32 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 15:17:16 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,32 @@ int	ft_atoi_em(const char *str, int *check)
 	return (nb * neg);
 }
 
+static void	ft_exit_utils(t_struc *s, int check)
+{
+	int	exit_value;
+
+	exit_value = ft_atoi_em(s->pars[1], &check);
+	if (check == 1)
+	{
+		printf("exit\nminishell: exit: %s: numeric argument required\n", 
+			s->pars[1]);
+		g_output = 255;
+		exit (255);
+	}
+	else if (check == 0)
+	{
+		g_output = exit_value;
+		printf("exit\n");
+		if (exit_value >= 255)
+			exit(exit_value - ((exit_value % 256) * 256));
+		else if (exit_value <= 255)
+			exit (exit_value + ((exit_value % 256) * 256));
+	}
+}
+
 void	ft_exit_par(t_struc *s)
 {
 	int	check;
-	int	exit_value;
 
 	check = 0;
 	ft_atoi_em(s->pars[1], &check);
@@ -58,24 +80,6 @@ void	ft_exit_par(t_struc *s)
 		return ;
 	}
 	else if (s->size_pars >= 2)
-	{
-		exit_value = ft_atoi_em(s->pars[1], &check);
-		if (check == 1)
-		{
-			printf("exit\nminishell: exit: ");
-			printf("%s: numeric argument required\n", s->pars[1]);
-			g_output = 255;
-			exit (255);
-		}
-		else if (check == 0)
-		{
-			g_output = exit_value;
-			printf("exit\n");
-			if (exit_value >= 255)
-				exit(exit_value - ((exit_value % 256) * 256));
-			else if (exit_value <= 255)
-				exit (exit_value + ((exit_value % 256) * 256));
-		}
-	}
+		ft_exit_utils(s, check);
 	exit(EXIT_SUCCESS);
 }

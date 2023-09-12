@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:30:14 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 15:59:33 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/05 15:22:35 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**ft_arrayjoin_env(t_struc *s, int index)
 
 	s->lenght_env++;
 	if (!s->pars[index] || !s->env)
-		exit(EXIT_FAILURE);//pas sure que ce soit la bonne manière de protéger 
+		exit(EXIT_FAILURE);
 	temp = malloc(sizeof(*temp) * ((int) s->lenght_env + 1));
 	if (!temp)
 		exit(EXIT_FAILURE);
@@ -82,7 +82,6 @@ char	**ft_arrayjoin_env(t_struc *s, int index)
 void	ft_export(t_struc *s)
 {
 	int	result;
-	int	i;
 	int	index;
 	int	ok;
 
@@ -101,14 +100,8 @@ void	ft_export(t_struc *s)
 		}
 		else if (result == -1 && ok == 0)
 		{
-			printf("minishell: export: `");//sortie d'erreur 
-			i = 0;
-			while (s->pars[index][i])
-			{
-				printf("%c", s->pars[index][i]);
-				i++;
-			}
-			printf("': not a valid identifer\n");
+			printf("minishell: export: '%s': not a valid identifier\n",
+				s->pars[index]);
 			ok = 1;
 		}
 		index++;

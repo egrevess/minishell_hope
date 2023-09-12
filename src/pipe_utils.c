@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/05 12:04:15 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:00:24 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ static void	redirect_io(t_struc *s, int fd[][2], int i, char **commands)
 static void	pipe_utils(t_struc *s, char **commands, int i, int num_commands)
 {
 	int		fd[num_commands - 1][2];
-	pid_t	pid[num_commands];
+	pid_t	*pid;
 
+	pid = malloc(sizeof(pid_t) * num_commands);
 	pipes_utils_1(s, commands, num_commands, i);
 	while (i < num_commands)
 	{
@@ -87,18 +88,22 @@ static void	pipe_utils(t_struc *s, char **commands, int i, int num_commands)
 		i ++;
 	}
 	close(fd[s->nb_pipe - 1][1]);
+	free(pid);
 }
 
 void	pipes(t_struc *s, int num_commands)
 {
-	char	*commands[num_commands];
+	char	**commands;
 	int		i;
 	pid_t	wpid;
 	int		status;
 
 	i = 0;
+	commands = malloc (sizeof (char *) * num_commands);
 	pipe_utils(s, commands, i, num_commands);
-	while ((wpid = wait(&status)) > 0);
+	wpid = wait(&status);
+	while (wpid > 0)
+		wpid = wait(&status);
 	while (i < num_commands)
 	{
 		free(commands[i]);
