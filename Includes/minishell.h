@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/12 10:44:07 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:35:56 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void	heredoc_handle(t_struc *s, char *delimiter);
 t_list	*init_list(t_struc *s, t_list *c, int i);
 int		ft_count_pipe1(t_struc *s);
 int		check_only_quo(char *str, char c, int i, int one);
+int		ft_check_other(const char *s, char c);
+char	*ft_del_quotes(char	*s, char c, char d);
 
 #endif

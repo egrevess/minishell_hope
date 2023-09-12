@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/12 10:44:31 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:36:25 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,51 +68,6 @@ static char	**ft_array_del(char **s, int find)
 	return (temp);
 }
 
-static	int	ft_check_other(const char *s, char c, char d)
-{
-	int	i;
-	int	quotes;
-	int	two;
-
-	i = 0;
-	two = 0;
-	quotes = 0;
-	while (s[i])
-	{
-		if (s[i] == c && (two == 1 || two == 0))
-		{
-			if (quotes == 0)
-			{
-				two = 1;
-				quotes = 1;
-			}
-			else if (quotes == 1)
-			{
-				two = 0;
-				quotes = 0;
-			}
-		}
-		else if (s[i] == d && (two == 2 || two == 0))
-		{
-			if (quotes == 0)
-			{
-				two = 2;
-				quotes = 1;
-			}
-			else if (quotes == 1)
-			{
-				two = 0;
-				quotes = 0;
-			}
-		}
-		i++;
-	}
-	if (two != 0)
-		return (1);
-	else
-		return (0);
-}
-
 static int	ft_check_quotes(char *s)
 {
 	int	i;
@@ -125,53 +80,6 @@ static int	ft_check_quotes(char *s)
 		i++;
 	}
 	return (0);
-}
-
-static	char	*ft_del_quotes(char	*s, char c, char d)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	temp = NULL;
-	while (s[i])
-	{
-		if (s[i] == c)
-		{
-			i++;
-			while (s[i] != c)
-			{
-				if (temp == NULL)
-					temp = ft_substr(s, i, 1);
-				else
-					temp = ft_strjoin(temp, ft_substr(s, i, 1));
-				i++;
-			}
-			i++;
-		}
-		else if (s[i] == d)
-		{
-			i++;
-			while (s[i] != d)
-			{
-				if (temp == NULL)
-					temp = ft_substr(s, i, i);
-				else
-					temp = ft_strjoin(temp, ft_substr(s, i, 1));
-				i++;
-			}
-			i++;
-		}
-		else
-		{
-			if (temp == NULL)
-				temp = ft_substr(s, i, 1);
-			else
-				temp = ft_strjoin(temp, ft_substr(s, i, 1));
-			i++;
-		}
-	}
-	return (temp);
 }
 
 char	**ft_parse_quotes(t_struc *s)
@@ -190,7 +98,7 @@ char	**ft_parse_quotes(t_struc *s)
 			s->pars = ft_array_del(s->pars, i);
 			i--;
 		}
-		else if (ft_check_other(s->pars[i], '\'', '\"') == 1)
+		else if (ft_check_other(s->pars[i], '\'') == 1)
 		{
 			printf("Error: syntax error near unexpected token\n");
 			return (NULL);

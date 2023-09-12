@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:19:02 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/12 10:45:40 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:06:29 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,3 @@ int	check_only_quo(char *str, char c, int i, int one)
 	}
 	return (0);
 }
-
-
