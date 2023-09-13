@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/05 12:03:27 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:22:56 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ void	execut2(int sig)
 }
 */
 
+char	*read_user_input(void)
+{
+	char	*str;
+
+	str = readline("burtonshell >$ ");
+	if (!str)
+		ft_exit();
+	add_history(str);
+	return (str);
+}
+
+int	process_user_input(char *input, t_struc *s, t_pipe *p)
+{
+	int		result;
+
+	s->pars = ft_parse(input, s);
+	s->pars = ft_pipe(s, p);
+	result = ft_pipes(s, p);
+	ft_sub_dollar(s);
+	s->pars = ft_parse_quotes(s);
+	ft_find_pdw(s);
+	return (result);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
@@ -58,10 +82,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		while (42)
 		{
-			str = readline("burtonshell >$ ");
-			if (!str)
-				ft_exit();
-			add_history(str);
+			str = read_user_input();
 			if (index == 0)
 			{
 				result = ft_init_env(&s, env);
@@ -69,12 +90,7 @@ int	main(int argc, char **argv, char **env)
 				if (result == 0)
 					exit (EXIT_FAILURE);
 			}
-			s.pars = ft_parse(str, &s);
-			s.pars = ft_pipe(&s, &p);
-			result_bis = ft_pipes(&s, &p);
-			ft_sub_dollar(&s);
-			s.pars = ft_parse_quotes(&s);
-			ft_find_pdw(&s);
+			result_bis = process_user_input(str, &s, &p);
 			if (s.pars)
 			{
 				//printf("nb pipe %d\n", p.nb_pipe);
