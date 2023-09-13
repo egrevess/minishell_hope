@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:00:01 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/05 15:17:16 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:18:38 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_exit_utils(t_struc *s, int check)
 	exit_value = ft_atoi_em(s->pars[1], &check);
 	if (check == 1)
 	{
-		printf("exit\nminishell: exit: %s: numeric argument required\n", 
+		printf("exit\nminishell: exit: %s: numeric argument required\n",
 			s->pars[1]);
 		g_output = 255;
 		exit (255);

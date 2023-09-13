@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:45:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/12 15:48:09 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:18:02 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*extract_command(char *input, int start, int end)
 {
 	int		len;
-	char	*command; 
+	char	*command;
 	int		i;
 
 	len = end - start;

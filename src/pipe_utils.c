@@ -3,26 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/12 10:07:19 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:44:51 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-static void	pipes_utils_1(t_struc *s, char **commands, int num_commands, int i)
+static int	**pipes_utils_1(t_struc *s, char **commands, int nb_commands, int i)
 {
 	t_list	*c;
+	int		**fd;
 
+	fd = (int **)malloc(sizeof(int *) * (nb_commands));
+	while (i < nb_commands)
+	{
+		fd[i] = malloc(sizeof(int) * 2);
+		i ++;
+	}
+	i = 0;
 	c = init_list(s, NULL, 0);
-	while (i < num_commands)
+	while (i < nb_commands)
 	{
 		commands[i] = ft_strdup(c->content);
 		c = c->next;
 		i ++;
 	}
+	return (fd);
 }
 
 static void	setup_pipe(int *pipe_fd)
@@ -34,7 +43,7 @@ static void	setup_pipe(int *pipe_fd)
 	}
 }
 
-static void	redirect_io(t_struc *s, int fd[][2], int i, char **commands)
+static void	redirect_io(t_struc *s, int **fd, int i, char **commands)
 {
 	if (i == 0)
 	{
@@ -64,11 +73,11 @@ static void	redirect_io(t_struc *s, int fd[][2], int i, char **commands)
 
 static void	pipe_utils(t_struc *s, char **commands, int i, int num_commands)
 {
-	int		fd[num_commands - 1][2];
+	int		**fd;
 	pid_t	*pid;
 
 	pid = malloc(sizeof(pid_t) * num_commands);
-	pipes_utils_1(s, commands, num_commands, i);
+	fd = pipes_utils_1(s, commands, num_commands, i);
 	while (i < num_commands)
 	{
 		setup_pipe(fd[i]);
