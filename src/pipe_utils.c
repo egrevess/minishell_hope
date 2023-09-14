@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/13 14:44:51 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/14 14:23:15 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	redirect_io(t_struc *s, int **fd, int i, char **commands)
 		close(fd[i - 1][1]);
 	}
 	ft_execve_pipe(s, ft_split(commands[i], ' '));
-	perror("ft_execve_pipe");
 	exit(EXIT_FAILURE);
 }
 
@@ -108,7 +107,7 @@ void	pipes(t_struc *s, int num_commands)
 	int		status;
 
 	i = 0;
-	commands = malloc (sizeof (char *) * num_commands);
+	commands = malloc (sizeof (char *) * num_commands); // Proteger le malloc
 	pipe_utils(s, commands, i, num_commands);
 	wpid = wait(&status);
 	while (wpid > 0)

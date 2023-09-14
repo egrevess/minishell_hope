@@ -26,7 +26,6 @@ SRC =	src/main.c\
 		src/parsing/parsing_utils3.c\
 		src/parsing/parsing_utils4.c\
 		src/parsing/ft_count_pipe.c\
-		src/parsing/ft_pipe.c\
 		src/parsing/ft_pipe_utils.c\
 
 

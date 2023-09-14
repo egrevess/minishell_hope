@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/13 15:22:56 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/14 16:13:23 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	main(int argc, char **argv, char **env)
 	int		result;
 	t_struc	s;
 	t_pipe	p;
-	//pid_t	pid;
-	//char *arg;
 	int		index;
 	int		i = 1;
 	int		result_bis;
@@ -77,7 +75,7 @@ int	main(int argc, char **argv, char **env)
 	put_head();
 	p.nb_pipe = 0;
 	//signal(SIGINT, execut);
-	//signal(SIGQUIT,execut);
+	//signal(SIGQUIT,execut1);
 	if (argc == 1)
 	{
 		while (42)

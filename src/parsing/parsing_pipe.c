@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:52:24 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/12 12:14:42 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:44:04 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,84 +65,17 @@ int	len_pars(char **pars)
 	}
 	return (i);
 }
-/*
+
 char	**ft_pipe(t_struc *s, t_pipe *p)
 {
-	int		i;
-	int		j;
-	int		until;
-	int		start;
-	int		nb_pipe;
-	char	**temp;
-	int		index;
+	int	nb_pipe;
 
-	j = 0;
-	i = 0;
-	index = 0;
 	s->size_pars = len_pars(s->pars);
 	nb_pipe = ft_count_pipe(s->pars, p, 0, 0);
 	if (nb_pipe > 0)
 	{
-		printf("size pars = %d\n", s->size_pars);
-		printf("nb_pipe = %d\n", nb_pipe);
-		printf("size malloc %d\n", s->size_pars + nb_pipe + 1);
-		temp = malloc(sizeof(*temp) * (s->size_pars + nb_pipe + 1));
-		if (!temp)
-			exit(EXIT_FAILURE);
-		while (s->pars[i])
-		{
-			j = 0;
-			while (j <= ((int) ft_strlen(s->pars[i]) - 1))
-			{
-				nb_pipe = 0;
-				if (s->pars[i][j] != '|')
-				{
-					until = 0;
-					start = j;
-					while (s->pars[i][j])
-					{
-						if (s->pars[i][j] == '|')
-							break ;
-						j++;
-					}
-					printf("inde = %d\n", index);
-					temp[index] = malloc(sizeof(char *) * (j - start + 1));
-					while (j > start)
-					{
-						temp[index][until] = s->pars[i][start];
-						until++;
-						start++;
-					}
-					temp[index][until] = '\0';
-					index++;
-				}
-				else if (s->pars[i][j] == '|')
-				{
-					until = 0;
-					while (s->pars[i][j] == '|')
-					{
-						nb_pipe++;
-						j++;
-					}
-					printf("inde = %d\n", index);
-					temp[index] = malloc(sizeof(*temp[index]) * (nb_pipe + 1));
-					while (nb_pipe > 0)
-					{
-						temp[index][until] = '|';
-						nb_pipe--;
-						until++;
-					}
-					temp[index][until] = '\0';
-					index++;
-				}
-			}
-			i++;
-		}
-		temp[index] = NULL;
-		index = 0;
-		return (temp);
+		return (split_pipe_commands(s->pars, p, 0, 0));
 	}
 	else
 		return (s->pars);
 }
-*/
