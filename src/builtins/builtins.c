@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/14 14:25:08 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:56:01 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 char	*ft_find_pdw(t_struc *s)
 {
 	s->pwd = malloc(sizeof(*s->pwd) * 1024);
+	if (!s->pwd)
+		exit(EXIT_FAILURE);
 	getcwd(s->pwd, 1024);
 	return (s->pwd);
 }

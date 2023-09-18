@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/18 11:18:09 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:55:23 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ static int	**pipes_utils_1(t_struc *s, char **commands, int nb_commands, int i)
 	int		**fd;
 
 	fd = (int **)malloc(sizeof(int *) * (nb_commands));
+	if (!fd)
+		exit(EXIT_FAILURE);
 	while (i < nb_commands)
 	{
 		fd[i] = malloc(sizeof(int) * 2);
+		if (!fd[i])
+			exit(EXIT_FAILURE);
 		i ++;
 	}
 	i = 0;
@@ -109,7 +113,7 @@ void	pipes(t_struc *s, int num_commands)
 	i = 0;
 	commands = malloc (sizeof (char *) * num_commands);
 	if (!commands)
-		ft_exit();
+		exit(EXIT_FAILURE);
 	pipe_utils(s, commands, i, num_commands);
 	wpid = wait(&status);
 	while (wpid > 0)

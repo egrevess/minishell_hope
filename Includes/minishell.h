@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/18 11:29:06 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:49:09 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_ij
 
 typedef struct s_struc
 {
-	
+	char	*str;
 	char	**pars;
 	char	**env;
 	char	**path;
@@ -41,6 +41,8 @@ typedef struct s_struc
 	int		size_second_pars;
 	int		size_pars;
 	int		lenght_env;
+	int		result;
+	int		index;
 	char	*pwd;
 	char	**history;
 	int		checker_export;
@@ -73,7 +75,7 @@ typedef struct s_command
 	struct t_command	*next;
 }		t_command;
 
-void	put_head(void);
+int		put_head(void);
 char	**ft_parse(char *str, t_struc *s);
 char	**ft_parse_quotes(t_struc *s);
 void	ft_builtins(t_struc *s);

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/18 11:24:52 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:50:10 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,52 +57,42 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	ft_sub_dollar(s);
 	s->pars = ft_parse_quotes(s);
 	ft_find_pdw(s);
+	if (s->pars)
+	{
+		if (result == 0 && p->nb_pipe == 0)
+			ft_builtins(s);
+		else if (result != 1 && p->nb_pipe != 0)
+			pipes(s, ft_count_pipe1(s) + 1);
+	}
+	s->index += 1;
 	return (result);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*str;
-	int		result;
 	t_struc	s;
 	t_pipe	p;
-	int		index;
-	int		i = 1;
-	int		result_bis;
-	(void) argv;
+	int		i;
 
-	index = 0;
-	put_head();
+	(void) argv;
+	s.index = 0;
+	i = put_head();
 	p.nb_pipe = 0;
 	//signal(SIGINT, execut);
 	//signal(SIGQUIT,execut1);
-	if (argc == 1)
+	if (argc != 1)
+		exit(EXIT_FAILURE);
+	while (42)
 	{
-		while (42)
+		s.str = read_user_input();
+		if (s.index == 0)
 		{
-			str = read_user_input();
-			if (index == 0)
-			{
-				result = ft_init_env(&s, env);
-				s.path = NULL;
-				if (result == 0)
-					exit (EXIT_FAILURE);
-			}
-			result_bis = process_user_input(str, &s, &p);
-			if (s.pars)
-			{
-				//printf("nb pipe %d\n", p.nb_pipe);
-				if (result_bis == 0 && p.nb_pipe == 0)
-				{
-					ft_builtins(&s);
-				}
-				else if (result_bis != 1 && p.nb_pipe != 0)
-				{
-					pipes(&s, ft_count_pipe1(&s) + 1);
-				}	
-			}
-			index++;
-			wait(&i);
+			s.result = ft_init_env(&s, env);
+			s.path = NULL;
+			if (s.result == 0)
+				exit (EXIT_FAILURE);
 		}
+		s.result = process_user_input(s.str, &s, &p);
+		wait(&i);
 	}
 }
