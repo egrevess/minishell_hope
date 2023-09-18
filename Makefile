@@ -20,7 +20,6 @@ SRC =	src/main.c\
 		src/dollar.c\
 		src/parsing/parsing_utils.c\
 		src/parsing/parsing_pipe.c \
-		src/heredoc.c\
 		src/pipe_utils.c\
 		src/parsing/parsing_utils2.c\
 		src/parsing/parsing_utils3.c\

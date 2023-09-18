@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/14 16:42:27 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:29:06 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@
 
 int	g_output;
 
+typedef struct s_ij
+{
+	int	i;
+	int	j;
+}	t_ij;
+
 typedef struct s_struc
 {
+	
 	char	**pars;
 	char	**env;
 	char	**path;

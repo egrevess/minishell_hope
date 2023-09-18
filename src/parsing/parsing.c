@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/14 14:23:49 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:25:44 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	**ft_parse(char *str, t_struc *s)
 	if (delimiter)
 	{
 		s->pars = ft_split(str, ' ');
-		heredoc_handle(s, delimiter);
 	}
 	return (ft_split(str, ' '));
 }

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:45:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/14 16:53:31 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:16:44 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ static char	**allocate_commands(int size)
 	return (commands);
 }
 
-static void	extract_pipe_symbols(char **pars, char **temp, int *index, int *j, int i)
+static void	extract_pipe_symbols(char **pars, char **temp, int *index, t_ij *t)
 {
 	int	count;
 	int	k;
 
 	k = 0;
 	count = 0;
-	while (pars[i][*j] == '|')
+	while (pars[t->i][t->j] == '|')
 	{
 		count++;
-		(*j)++;
+		t->j += 1;
 	}
 	temp[*index] = (char *)malloc(sizeof(char) * (count + 1));
 	if (!temp[*index])
@@ -68,22 +68,25 @@ static void	extract_pipe_symbols(char **pars, char **temp, int *index, int *j, i
 
 static void	extract_npipe_cmnd(char **pars, char **temp, int *index, int i)
 {
-	int	j;
-	int	start;
+	int		start;
+	t_ij	t;
 
-	j = 0;
-	start = j;
-	while (pars[i][j])
+	t.j = 0;
+	start = t.j;
+	while (pars[i][t.j])
 	{
-		if (pars[i][j] != '|')
+		if (pars[i][t.j] != '|')
 		{
-			while (pars[i][j] && pars[i][j] != '|')
-				j++;
-			temp[*index] = extract_command(pars[i], start, j);
+			while (pars[i][t.j] && pars[i][t.j] != '|')
+				t.j += 1;
+			temp[*index] = extract_command(pars[i], start, t.j);
 			(*index)++;
 		}
-		else if (pars[i][j] == '|')
-			extract_pipe_symbols(pars, temp, index, &j, i);
+		else if (pars[i][t.j] == '|')
+		{
+			t.i = i;
+			extract_pipe_symbols(pars, temp, index, &t);
+		}
 	}
 }
 

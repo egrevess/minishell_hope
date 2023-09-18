@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/14 14:23:15 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:18:09 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ void	pipes(t_struc *s, int num_commands)
 	int		status;
 
 	i = 0;
-	commands = malloc (sizeof (char *) * num_commands); // Proteger le malloc
+	commands = malloc (sizeof (char *) * num_commands);
+	if (!commands)
+		ft_exit();
 	pipe_utils(s, commands, i, num_commands);
 	wpid = wait(&status);
 	while (wpid > 0)
