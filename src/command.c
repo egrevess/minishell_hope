@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:34:44 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/14 16:14:21 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:29:31 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,34 @@ static int	execute_command(char **path, char **pars, char **env)
 		i++ ;
 	}
 	printf("minishell: %s: command not found\n", pars[0]);
+	exit(1);
 	return (1);
 }
 
 int	ft_execve(t_struc *s)
 {
+	pid_t	pid;
 	int		res;
+	int		status;
 
+	res = 0;
 	if (ft_in_env(s, "PATH") != -1)
 		s->path = ft_split(ft_find_in_env(s, ft_in_env(s, "PATH")), ':');
-	if (!s->path)
-		return (printf("minishell: %s: command not found\n", s->pars[0]), 1);
-	res = execute_command(s->path, s->pars, s->env);
+	else
+	{
+		printf("minishell: %s: No such file or directory\n", s->pars[0]);
+		return (1);
+	}
+	pid = fork ();
+	if (pid == 0)
+	{
+		res = execute_command(s->path, s->pars, s->env);
+		exit(res);
+	}
+	else if (pid < 0)
+		exit(EXIT_FAILURE);
+	wait(&status);
+	if (WIFEXITED(status))
+		res = WEXITSTATUS(status);
 	return (res);
-	return (0);
 }

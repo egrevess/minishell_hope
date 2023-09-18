@@ -6,11 +6,25 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:56:52 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/04 15:46:24 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:09:00 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minishell.h"
+
+static int	check_n(char *str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_echo_option(char **par)
 {
@@ -22,7 +36,7 @@ int	ft_echo_option(char **par)
 	while (par[i])
 	{
 		if (ft_strncmp(par[i], "-n", (size_t) 2) == 0
-			&& (int) ft_strlen(par[i]) == 2)
+			&& check_n(par[i]) == 0)
 			check_nl++;
 		else
 			break ;

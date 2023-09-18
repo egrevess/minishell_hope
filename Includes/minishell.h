@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/18 11:49:09 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:27:41 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_struc
 	char	**env;
 	char	**path;
 	char	**copy_env;
-	int		size_first_pars;
+	int		sizefirst_pars;
 	int		size_second_pars;
 	int		size_pars;
 	int		lenght_env;
