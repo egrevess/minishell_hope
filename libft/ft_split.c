@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:49:20 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/04 13:32:15 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:22:55 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	size = check_str(s, c);
-	spl = (char **)malloc(sizeof(spl) * (size + 1));
+	spl = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!spl)
 		return (NULL);
-	spl = ft_create_str(spl, s, c, i);
+	ft_create_str(spl, s, c, i);
 	return (spl);
 }

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/18 11:50:10 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:37:15 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*read_user_input(void)
 
 	str = readline("burtonshell >$ ");
 	if (!str)
-		ft_exit();
+		exit(EXIT_FAILURE);
 	add_history(str);
 	return (str);
 }
@@ -93,6 +93,7 @@ int	main(int argc, char **argv, char **env)
 				exit (EXIT_FAILURE);
 		}
 		s.result = process_user_input(s.str, &s, &p);
+		ft_free(&s, &p);
 		wait(&i);
 	}
 }

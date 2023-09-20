@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/05 14:58:24 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:31:07 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	check_dbqu_utils(t_struc *s, int index, int i, char **par)
 	if (check == reps && i == (int)ft_strlen(s->pars[index]))
 		par = ft_split(s->pars[index], '\"');
 	else if (check != reps)
-		printf("error : double quote");
+		printf("Error: syntax error near unexpected token\n");
 }
 
 void	check_double_quotes(t_struc *s, int index)

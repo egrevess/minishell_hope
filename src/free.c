@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:05:38 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 16:28:28 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/19 16:35:54 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,25 @@ int	ft_free_array(char **tab, int index)
 	}
 	free(tab);
 	return (0);
+}
+void	ft_free(t_struc *s, t_pipe *p)
+{
+	int	i;
+
+	(void) p;
+	i = 0;
+	
+	if (s->str)
+		free(s->str);
+	if (s->pars)
+	{
+		while (s->pars[i])
+		{
+			free(s->pars[i]);
+			i++;
+		}
+		free (s->pars);
+	}
+	if (s->pwd)
+		free (s->pwd);
 }

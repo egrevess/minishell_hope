@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:44:22 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/25 16:27:51 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/19 12:34:01 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
 void	ft_signal(int sig)
 {
 	(void) sig;

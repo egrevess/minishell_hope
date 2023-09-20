@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 11:44:47 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/18 12:39:52 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:36:16 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,15 @@ static void	pipe_utils(t_struc *s, char **commands, int i, int num_commands)
 	pid_t	*pid;
 
 	pid = malloc(sizeof(pid_t) * num_commands);
+	if (!pid)
+		exit(EXIT_FAILURE);
 	fd = pipes_utils_1(s, commands, num_commands, i);
 	while (i < num_commands)
 	{
 		setup_pipe(fd[i]);
 		pid[i] = fork();
 		if (pid[i] == -1)
-		{
-			perror("fork");
 			exit(EXIT_FAILURE);
-		}
 		else if (pid[i] == 0)
 			redirect_io(s, fd, i, commands);
 		else if (i > 0)
