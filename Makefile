@@ -36,18 +36,21 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g -std=c99
 
-LDFLAGS="-L/Users/viburton/.brew/Cellar/readline/8.2.1/lib"
-CPPFLAGS="-IUsers/viburton/.brew/Cellar/readline/8.2.1/include"
 LIBFT = ./libft/libft.a
+READLINELIB = -lreadline
+
+REMOVE = rm -f
+
+COMPILE = gcc $(CFLAGS) -o $(NAME) -I ./lib -L. $(LIBFT) $(READLINELIB)
+
+LDFLAGS		= -L/${HOME}/.brew/opt/readline/lib
+CPPFLAGS	 = -I/${HOME}/.brew/opt/readline/include
 
 all: $(NAME)
+$(NAME): $(OBJ)
+	make -C libft
+	$(COMPILE) $(OBJ) ${LDFLAGS} ${CPPFLAGS} -L. $(LIBFT)
 
-$(NAME): $(SRC) $(OBJ) Includes/minishell.h
-	@make -C ./libft
-	$(CC) $(FLAGS) $(LDFLAGs) $(CPPFLAGS) -lreadline $(SRC) $(LIBFT) -o $(NAME)
-
-%.o: %.c
-	$(CC) -c $(FLAGS) $(CPPFLAGS) $< -o $@
 
 clean:
 	rm -rf $(OBJ)
@@ -60,3 +63,32 @@ fclean: clean
 re: fclean all
 
 phony: fclean all re clean
+
+READLINELIB = -lreadline
+
+REMOVE = rm -f
+
+COMPILE = gcc $(CFLAGS) -o $(NAME) -I ./lib -L. $(LIBFT) $(READLINELIB)
+
+LDFLAGS		= -L/${HOME}/.brew/opt/readline/lib
+CPPFLAGS	 = -I/${HOME}/.brew/opt/readline/include
+
+all: $(NAME)
+$(NAME): $(OBJ)
+	make -C libft
+	$(COMPILE) $(OBJ) ${LDFLAGS} ${CPPFLAGS} -L. $(LIBFT)
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) ${CPPFLAGS} -I./libft -o $@ $<
+
+clean:
+	$(REMOVE) $(OBJ)
+	make -C ./libft clean
+
+fclean: clean
+	$(REMOVE) $(NAME)
+	make -C ./libft fclean
+
+re: fclean all
+
+.PHONY: all clean fclean re

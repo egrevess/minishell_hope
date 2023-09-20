@@ -6,17 +6,15 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/20 11:52:05 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:08:21 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-/*
 void	execut(int sig)
 {
 	(void) sig;
-
 	g_output = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -28,13 +26,6 @@ void	execut1(int sig)
 	(void) sig;
 	exit (EXIT_FAILURE);
 }
-
-void	execut2(int sig)
-{
-	(void) sig;
-	//censé rien faire 
-}
-*/
 
 char	*read_user_input(void)
 {
@@ -55,12 +46,6 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	result = ft_pipes(s, p);
 	ft_sub_dollar(s);
 	s->pars = ft_parse_quotes(s);
-	int i = 0;
-	while (s->pars[i])
-	{
-		printf("pars[%i] = %s \n", i, s->pars[i]);
-		i++;
-	}
 	ft_find_pdw(s);
 	if (s->pars)
 	{
@@ -83,8 +68,8 @@ int	main(int argc, char **argv, char **env)
 	s.index = 0;
 	i = put_head();
 	p.nb_pipe = 0;
-	//signal(SIGINT, execut);
-	//signal(SIGQUIT,execut1);
+	signal(SIGINT, execut);
+	signal(SIGQUIT, execut1);
 	if (argc != 1)
 		exit(EXIT_FAILURE);
 	while (42)
