@@ -6,13 +6,13 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/19 14:57:19 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:31:46 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minishell.h"
 
-char	**ft_parse(char *str, t_struc *s)
+void	ft_parse(char *str, t_struc *s, t_pipe *p)
 {
 	int		i;
 	char	*delimiter;
@@ -33,7 +33,8 @@ char	**ft_parse(char *str, t_struc *s)
 		i++;
 	}
 	free(delimiter);
-	return (ft_split(str, ' '));
+	s->pars = ft_split(str, ' ');
+	s->pars = ft_pipe(s, p);
 }
 
 static char	**ft_array_del(char **s, int find)

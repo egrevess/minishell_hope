@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/19 16:36:56 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:49:05 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_ij
 {
 	int	i;
 	int	j;
+	int	start;
+	int	until;
+	int	index;
 }	t_ij;
 
 typedef struct s_struc
@@ -77,10 +80,9 @@ typedef struct s_command
 }		t_command;
 
 int		put_head(void);
-char	**ft_parse(char *str, t_struc *s);
+void	ft_parse(char *str, t_struc *s, t_pipe *p);
 char	**ft_parse_quotes(t_struc *s);
 void	ft_builtins(t_struc *s);
-int		len_pars(char **pars);
 int		ft_free_array(char **tab, int index);
 void	ft_printf_env(t_struc *s);
 int		ft_init_env(t_struc *s, char **env);
@@ -116,8 +118,7 @@ int		ft_count_pipe1(t_struc *s);
 int		check_only_quo(char *str, char c, int i, int one);
 int		ft_check_other(const char *s, char c);
 char	*ft_del_quotes(char	*s, char c, char d);
-int		ft_count_pipe(char **line, t_pipe *p, int j, int i);
-char	**split_pipe_commands(char **pars, t_pipe *p, int i, int j);
+int		ft_count_pipe(char **line, t_pipe *p);
 void	ft_free(t_struc *s, t_pipe *p);
 
 #endif

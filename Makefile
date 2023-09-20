@@ -25,7 +25,6 @@ SRC =	src/main.c\
 		src/parsing/parsing_utils3.c\
 		src/parsing/parsing_utils4.c\
 		src/parsing/ft_count_pipe.c\
-		src/parsing/ft_pipe_utils.c\
 
 
 
@@ -35,10 +34,10 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -std=c99
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g -std=c99
 
-LDFLAGS	= -L$(HOME)/.brew/opt/readline/lib
-CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
+LDFLAGS="-L/Users/viburton/.brew/Cellar/readline/8.2.1/lib"
+CPPFLAGS="-IUsers/viburton/.brew/Cellar/readline/8.2.1/include"
 LIBFT = ./libft/libft.a
 
 all: $(NAME)
