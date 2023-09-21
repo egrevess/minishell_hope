@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/20 17:08:21 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:43:18 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	execut(int sig)
 void	execut1(int sig)
 {
 	(void) sig;
-	exit (EXIT_FAILURE);
+	exit (EXIT_SUCCESS);
 }
 
 char	*read_user_input(void)
@@ -68,12 +68,12 @@ int	main(int argc, char **argv, char **env)
 	s.index = 0;
 	i = put_head();
 	p.nb_pipe = 0;
-	signal(SIGINT, execut);
-	signal(SIGQUIT, execut1);
 	if (argc != 1)
 		exit(EXIT_FAILURE);
 	while (42)
 	{
+		signal(SIGINT, execut);
+		signal(SIGQUIT, execut1);
 		s.str = read_user_input();
 		if (s.index == 0)
 		{

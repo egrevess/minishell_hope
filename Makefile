@@ -63,32 +63,3 @@ fclean: clean
 re: fclean all
 
 phony: fclean all re clean
-
-READLINELIB = -lreadline
-
-REMOVE = rm -f
-
-COMPILE = gcc $(CFLAGS) -o $(NAME) -I ./lib -L. $(LIBFT) $(READLINELIB)
-
-LDFLAGS		= -L/${HOME}/.brew/opt/readline/lib
-CPPFLAGS	 = -I/${HOME}/.brew/opt/readline/include
-
-all: $(NAME)
-$(NAME): $(OBJ)
-	make -C libft
-	$(COMPILE) $(OBJ) ${LDFLAGS} ${CPPFLAGS} -L. $(LIBFT)
-
-%.o: %.c
-	$(CC) -c $(CFLAGS) ${CPPFLAGS} -I./libft -o $@ $<
-
-clean:
-	$(REMOVE) $(OBJ)
-	make -C ./libft clean
-
-fclean: clean
-	$(REMOVE) $(NAME)
-	make -C ./libft fclean
-
-re: fclean all
-
-.PHONY: all clean fclean re
