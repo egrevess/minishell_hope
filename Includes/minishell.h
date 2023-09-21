@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 16:53:06 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:35:13 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ int		ft_check_other(const char *s, char c);
 char	*ft_del_quotes(char	*s, char c, char d);
 int		ft_count_pipe(char **line, t_pipe *p);
 void	ft_free(t_struc *s, t_pipe *p);
+void	pipe_util(t_struc *s, char **commands, int i, int num_commands);
 
 #endif

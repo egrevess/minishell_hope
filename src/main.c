@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 11:49:53 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:44:50 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 			pipes(s, ft_count_pipe1(s) + 1);
 	}
 	s->index += 1;
-	//ft_free(s, p);
+	free(s->pwd); //deplacer ici mais normalement fonctionne
+	free(s->str); //deplacer ici mais normalement fonctionne
 	return (result);
 }
 
@@ -84,8 +85,6 @@ int	main(int argc, char **argv, char **env)
 				exit (EXIT_FAILURE);
 		}
 		s.result = process_user_input(s.str, &s, &p);
-		free(s.pwd);
-		free(s.str);
 		wait(&i);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 18:14:50 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:30:14 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,6 @@ char	*ft_find_in_env(t_struc *s, int i)
 	}
 	temp[x] = '\0';
 	return (temp);
-}
-
-int	ft_find_in_env_dollar(t_struc *s, int index)
-{
-	int		i;
-	char	*par;
-	int		check;
-
-	check = -1;
-	s->size_second_pars = (int) ft_strlen(s->pars[index]);
-	par = malloc(sizeof(*par) * (s->size_second_pars));
-	if (!par)
-		exit (EXIT_FAILURE);
-	par = ft_memcpy(par, &s->pars[index][1], (size_t)(s->size_second_pars - 1));
-	i = 0;
-	while (s->env[i])
-	{
-		if (ft_strncmp(s->env[i], par, (size_t)(s->size_second_pars - 1)) == 0
-			&& (s->size_second_pars - 1) ==
-			(int)(ft_strrchr((const char*) s->env[i], '=') - s->env[i]))
-		{
-			check = i;
-			break ;
-		}
-		i++;
-	}
-	free (par);
-	return (check);
 }
 
 static void	check_dbqu_utils(t_struc *s, int index, int i, char ***par)

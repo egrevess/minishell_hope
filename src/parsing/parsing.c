@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 18:16:23 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:29:50 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,34 @@ static char	**ft_array_del(char **s, int find)
 	index = 0;
 	ft_free_array(s, ft_len_tab(s) - 1);
 	return (temp);
+}
+
+int	ft_find_in_env_dollar(t_struc *s, int index)
+{
+	int		i;
+	char	*par;
+	int		check;
+
+	check = -1;
+	s->size_second_pars = (int) ft_strlen(s->pars[index]);
+	par = malloc(sizeof(*par) * (s->size_second_pars));
+	if (!par)
+		exit (EXIT_FAILURE);
+	par = ft_memcpy(par, &s->pars[index][1], (size_t)(s->size_second_pars - 1));
+	i = 0;
+	while (s->env[i])
+	{
+		if (ft_strncmp(s->env[i], par, (size_t)(s->size_second_pars - 1)) == 0
+			&& (s->size_second_pars - 1) ==
+			(int)(ft_strrchr((const char*) s->env[i], '=') - s->env[i]))
+		{
+			check = i;
+			break ;
+		}
+		i++;
+	}
+	free (par);
+	return (check);
 }
 
 static int	ft_check_quotes(char *s)
