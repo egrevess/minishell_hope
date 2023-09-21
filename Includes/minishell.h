@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
 /*   Updated: 2023/09/20 17:08:50 by viburton         ###   ########.fr       */
@@ -21,6 +21,7 @@
 # include "../libft/libft.h"
 # include <signal.h>
 # include <limits.h>
+# include <stdbool.h>
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -53,7 +54,6 @@ typedef struct s_struc
 	int		checker_export;
 	int		nb_pipe;
 	int		echo_quotes;
-	char	*heredoc_content;
 }		t_struc;
 
 typedef struct s_var

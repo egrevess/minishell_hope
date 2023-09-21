@@ -3,17 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:29:18 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/19 17:25:37 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:05:32 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-static void	ft_free(char **spl, size_t i)
+typedef struct
+{
+	int end;
+	int	start;
+	int	quotes;
+	int	two;
+}	Data;
+
+static char	**ft_free(char **spl, size_t i)
 {
 	while (i > 0)
 	{
@@ -22,6 +30,7 @@ static void	ft_free(char **spl, size_t i)
 	}
 	free(spl[0]);
 	free(spl);
+	return (NULL);
 }
 
 static char	*ft_strndup(char const *str, size_t size)
@@ -42,66 +51,51 @@ static char	*ft_strndup(char const *str, size_t size)
 	return (dest);
 }
 
-static void	crt_strtls(const char *s, size_t *startend, int *quotes, int *two)
+void	ft_create_str_1(Data *d, char const *s)
 {
-	if (s[startend[0] + startend[1]] == '\'')
+	d->quotes = 0;
+	d->two = 0;
+	if (s[d->start + d->end] == '\'')
 	{
-		startend[1] += 1;
-		*two = 1;
-		while (s[startend[0] + startend[1]]
-			&& s[startend[0] + startend[1]] != '\'')
-			startend[1] += 1;
-		*quotes = startend[1];
+		d->end++;
+		d->two = 1;
+		while (s[d->start + d->end] && s[d->start + d->end] != '\'')
+			d->end++;
+		d->quotes = d->end;
 	}
-	else if (s[startend[0] + startend[1]] == '\"' && *two != 1)
+	else if(s[d->start + d->end] == '\"' && d->two != 1)
 	{
-		startend[1] += 1;
-		*two = 2;
-		while (s[startend[0] + startend[1]]
-			&& s[startend[0] + startend[1]] != '\"')
-			startend[1] += 1;
-		*quotes = startend[1];
+		d->end++;
+		d->two = 2;
+		while (s[d->start + d->end] && s[d->start + d->end] != '\"')
+			d->end++;
+		d->quotes = d->end;
 	}
-	startend[1] += 1;
+	d->end++;
 }
 
-static int	crate_strtls2(char **spl, size_t *startend, int *quotes, int *i)
+char	**ft_create_str(char **spl, char const *s, char c, int i) //changement des fonctions au dessus
 {
-	if (!spl[*i])
+	Data d;
+	
+	d.start = 0;
+	while (s[d.start])
 	{
-		ft_free(spl, *i);
-		return (0);
-	}
-	*i += 1;
-	if ((int)startend[1] == *quotes + 1 || *quotes == -1)
-		startend[1] -= 1;
-	startend[0] = startend[0] + startend[1];
-	return (1);
-}
-
-char	**ft_create_str(char **spl, const char *s, char c, int i)
-{
-	size_t		startend[2];
-	int			quotes;
-	int			two;
-
-	startend[0] = 0;
-	while (s[startend[0]])
-	{
-		startend[1] = 0;
-		quotes = 0;
-		two = 0;
-		while (s[startend[0] + startend[1]]
-			&& s[startend[0] + startend[1]] != c)
-			crt_strtls(s, startend, &quotes, &two);
-		if (startend[1] > 0)
+		d.end = 0;
+		while (s[d.start + d.end] && s[d.start + d.end] != c)
+			ft_create_str_1(&d, s);
+		if (d.end > 0)
 		{
-			spl[i] = ft_strndup(s + startend[0], startend[1]);
-			if (!crate_strtls2(spl, startend, &quotes, &i))
-				return (NULL);
+			spl[i] = ft_strndup(s + d.start, d.end);
+			if (!spl[i])
+				return (ft_free(spl, i));
+			i++;
+			if (d.end == d.quotes + 1 || d.quotes == -1)
+				d.end--;
+			d.start = d.start + d.end;
 		}
-		if (s[startend[0]])
-			startend[0]++;
+		if (s[d.start])
+			d.start++;
 	}
 	spl[i] = NULL;
 	return (spl);

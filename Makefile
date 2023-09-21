@@ -34,7 +34,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g -std=c99
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -std=c99
 
 LIBFT = ./libft/libft.a
 READLINELIB = -lreadline

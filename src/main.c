@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
 /*   Updated: 2023/09/21 10:43:18 by viburton         ###   ########.fr       */
@@ -46,6 +46,15 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	result = ft_pipes(s, p);
 	ft_sub_dollar(s);
 	s->pars = ft_parse_quotes(s);
+	int i = 0;
+	if (s->pars) //rajouter le if
+	{
+		while (s->pars[i])
+		{
+			printf("pars[%i] = %s \n", i, s->pars[i]);
+			i++;
+		}
+	}
 	ft_find_pdw(s);
 	if (s->pars)
 	{
@@ -83,7 +92,7 @@ int	main(int argc, char **argv, char **env)
 				exit (EXIT_FAILURE);
 		}
 		s.result = process_user_input(s.str, &s, &p);
-		ft_free(&s, &p);
+		//ft_free(&s, &p);
 		wait(&i);
 	}
 }

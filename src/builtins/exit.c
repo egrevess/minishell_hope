@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:00:01 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/14 14:25:16 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:06:34 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_exit(void)
 {
+	printf("exit\n");
 	exit(EXIT_SUCCESS);
 }
 
