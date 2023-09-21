@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/19 12:31:07 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:38:54 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	check_dbqu_utils(t_struc *s, int index, int i, char **par)
 
 	check = 0;
 	reps = 0;
+	(void)	par;
 	while (s->pars[index][i] == '\"' )
 	{
 		reps++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:05:34 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/12 11:12:01 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:01:36 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

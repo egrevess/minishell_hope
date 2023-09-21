@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/20 13:48:32 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:40:33 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static void	handle_complex_builtin(t_struc *s)
 void	ft_builtins(t_struc *s)
 {
 	s->size_pars = ft_len_tab(s->pars);
-	if (s->size_pars == 1 && !ft_strncmp(s->heredoc_content, "\0", 1))
+	if (s->size_pars == 1 )
 		handle_single_builtin(s);
-	else if (s->size_pars > 1 && !ft_strncmp(s->heredoc_content, "\0", 1))
+	else if (s->size_pars > 1 )
 		handle_complex_builtin(s);
 }

@@ -3,40 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/20 11:31:46 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:04:29 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minishell.h"
 
-void	ft_parse(char *str, t_struc *s, t_pipe *p)
+void	ft_parse(char *str, t_struc *s, t_pipe *p) // changement
 {
-	int		i;
-	char	*delimiter;
-
-	i = 0;
-	delimiter = NULL;
-	s->heredoc_content = "\0";
-	while (str[i])
-	{
-		if (str[i] == '<' && str[i + 1] == '<')
-		{
-			if (str[i + 2] == ' ')
-				delimiter = ft_substr(str, i + 3, ft_strlen(str));
-			else
-				delimiter = ft_substr(str, i + 2, ft_strlen(str));
-			break ;
-		}
-		i++;
-	}
-	free(delimiter);
 	s->pars = ft_split(str, ' ');
 	s->pars = ft_pipe(s, p);
 }
-
 static char	**ft_array_del(char **s, int find)
 {
 	char	**temp;
@@ -88,7 +68,7 @@ char	**ft_parse_quotes(t_struc *s)
 	while (s->pars[i])
 	{
 		if ((s->pars[i][0] == '\'' || s->pars[i][0] == '\"')
-			&& check_only_quo(s->pars[i], s->pars[i][0], 0, 0) == 0)
+			&& check_only_quo(s->pars[i], s->pars[i][0], -1 , 0) == 0) //changer le 0 en - 1
 		{
 			if (!s->pars[i + 1])
 				s->echo_quotes = 1;

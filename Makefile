@@ -34,7 +34,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g -std=c99
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -std=c99
 
 LDFLAGS="-L/Users/viburton/.brew/Cellar/readline/8.2.1/lib"
 CPPFLAGS="-IUsers/viburton/.brew/Cellar/readline/8.2.1/include"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 11:44:29 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/13 14:18:58 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/21 10:22:40 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ size_t	check_str(char const *s, char c)
 	n = 0;
 	quotes = 0;
 	two = 0;
-	if (!(s[0]))
-		return (0);
 	if (s[0] != c)
 		n++;
 	while (s[i])

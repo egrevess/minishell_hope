@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:31:33 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/05 09:19:54 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:38:23 by emmagrevess      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static void	find_in_env_utils(t_struc *s, int i, int size, int index)
 	char	*temp_env;
 	char	*temp_pars;
 
+	(void) size;
 	temp_pars = ft_copy_pars_after_equal(s, index);
 	size = (int) ft_strlen(s->env[i]);
 	temp_env = ft_strdup(s->env[i]);
@@ -99,14 +100,13 @@ int	ft_find_in_env_export(t_struc *s, int index)
 	int		i;
 	int		j;
 	int		size;
-	char	*temp_pars;
 
 	i = 0;
 	j = 0;
 	if (s->checker_export == 1)
 	{
 		s->pars[index] = ft_change_pars_export(s, index);
-		temp_pars = ft_copy_pars_after_equal(s, index);
+		ft_copy_pars_after_equal(s, index);
 	}
 	size = ft_strrchr((const char *) s->pars[index], '=') - s->pars[index];
 	while (s->env[i])
