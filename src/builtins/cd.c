@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:56:20 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/04 15:11:44 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:08:55 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	send_path(char *path, t_struc *s)
 {
 	char	*temp;
-
+	
+	if (s->pwd)
+		free(s->pwd);
 	temp = ft_find_pdw(s);
 	if (path[0] == '~')
 		path = getenv("HOME");
@@ -83,6 +85,7 @@ void	change_value_env(t_struc *s, char *temp)
 	}
 	if (check == 0)
 		s->env = ft_arrayjoin_oldpwd(s, ft_strjoin("OLDPWD=", temp));
+	free (temp);
 }
 
 void	ft_cd(t_struc *s)

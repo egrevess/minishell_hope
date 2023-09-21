@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 10:40:33 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/09/21 11:58:40 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	ft_builtins(t_struc *s)
 		handle_single_builtin(s);
 	else if (s->size_pars > 1 )
 		handle_complex_builtin(s);
+	ft_free_array(s->pars, ft_len_tab(s->pars) - 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/20 15:38:54 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/09/21 13:09:09 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int	ft_find_in_env_dollar(t_struc *s, int index)
 		}
 		i++;
 	}
+	free (par);
 	return (check);
 }
 
-static void	check_dbqu_utils(t_struc *s, int index, int i, char **par)
+static void	check_dbqu_utils(t_struc *s, int index, int i, char ***par)
 {
 	int		reps;
 	int		check;
@@ -102,6 +103,7 @@ void	check_double_quotes(t_struc *s, int index)
 		return ;
 	if (ft_len_tab(par) == 1)
 	{
+		free(s->pars[index]);
 		s->pars[index] = ft_strdup(par[0]);
 		ft_free_array(par, ft_len_tab(par) - 1);
 	}
