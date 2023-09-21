@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 11:58:40 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:16:59 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	handle_single_builtin(t_struc *s)
 	else if (ft_strncmp(s->pars[0], "$?", 2) == 0)
 		ft_dollar(s);
 	else
-		g_output = ft_execve(s);
+		g_output = ft_execve(s, 0, 0, NULL);
 }
 
 static void	handle_complex_builtin(t_struc *s)
@@ -66,16 +66,22 @@ static void	handle_complex_builtin(t_struc *s)
 		ft_exit_par(s);
 	else if (ft_strncmp(s->pars[0], "$?", 2) == 0)
 		ft_dollar(s);
+	else if (ft_strncmp(s->pars[0], "env", 3) == 0 && s->sizefirst_pars == 3)
+	{
+		g_output = 1;
+		printf ("Error: syntax error near unexpected token\n");
+	}
 	else
-		g_output = ft_execve(s);
+		g_output = ft_execve(s, 0, 0, NULL);
 }
 
 void	ft_builtins(t_struc *s)
 {
 	s->size_pars = ft_len_tab(s->pars);
-	if (s->size_pars == 1 )
+	if (s->size_pars == 1)
 		handle_single_builtin(s);
-	else if (s->size_pars > 1 )
+	else if (s->size_pars > 1)
 		handle_complex_builtin(s);
 	ft_free_array(s->pars, ft_len_tab(s->pars) - 1);
+	//ft_free_array( s->path, ft_len_tab(s->path) - 1);
 }

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:29:18 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 11:05:32 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/09/21 18:22:11 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-typedef struct
+typedef struct s_data
 {
-	int end;
+	int	end;
 	int	start;
 	int	quotes;
 	int	two;
-}	Data;
+}	t_data;
 
 static char	**ft_free(char **spl, size_t i)
 {
@@ -51,7 +51,7 @@ static char	*ft_strndup(char const *str, size_t size)
 	return (dest);
 }
 
-void	ft_create_str_1(Data *d, char const *s)
+void	ft_create_str_1(t_data *d, char const *s)
 {
 	d->quotes = 0;
 	d->two = 0;
@@ -63,7 +63,7 @@ void	ft_create_str_1(Data *d, char const *s)
 			d->end++;
 		d->quotes = d->end;
 	}
-	else if(s[d->start + d->end] == '\"' && d->two != 1)
+	else if (s[d->start + d->end] == '\"' && d->two != 1)
 	{
 		d->end++;
 		d->two = 2;
@@ -74,10 +74,10 @@ void	ft_create_str_1(Data *d, char const *s)
 	d->end++;
 }
 
-char	**ft_create_str(char **spl, char const *s, char c, int i) //changement des fonctions au dessus
+char	**ft_create_str(char **spl, char const *s, char c, int i)
 {
-	Data d;
-	
+	t_data	d;
+
 	d.start = 0;
 	while (s[d.start])
 	{

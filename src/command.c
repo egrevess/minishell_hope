@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:34:44 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/18 16:29:31 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:53:33 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,16 @@ static int	execute_command(char **path, char **pars, char **env)
 	return (1);
 }
 
-int	ft_execve(t_struc *s)
+int	ft_execve(t_struc *s, int res, int status, char *str)
 {
 	pid_t	pid;
-	int		res;
-	int		status;
 
-	res = 0;
 	if (ft_in_env(s, "PATH") != -1)
-		s->path = ft_split(ft_find_in_env(s, ft_in_env(s, "PATH")), ':');
+	{
+		str = ft_find_in_env(s, ft_in_env(s, "PATH"));
+		s->path = ft_split(str, ':');
+		free(str);
+	}
 	else
 	{
 		printf("minishell: %s: No such file or directory\n", s->pars[0]);

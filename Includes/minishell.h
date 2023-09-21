@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/20 17:08:50 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:53:06 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <limits.h>
 # include <stdbool.h>
+# include <stdlib.h>
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -94,7 +95,7 @@ void	ft_export(t_struc *s);
 int		ft_len_tab(char **tab);
 void	ft_exit(void);
 void	ft_signal(int sig);
-int		ft_execve(t_struc *s);
+int		ft_execve(t_struc *s, int res, int status, char *str);
 int		ft_unset(t_struc *s);
 int		ft_find_in_env_unset(t_struc *s, int index);
 void	ft_cd(t_struc *s);

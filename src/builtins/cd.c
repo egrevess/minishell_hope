@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:56:20 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 12:08:55 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:12:41 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	send_path(char *path, t_struc *s)
 {
 	char	*temp;
-	
+
 	if (s->pwd)
 		free(s->pwd);
 	temp = ft_find_pdw(s);

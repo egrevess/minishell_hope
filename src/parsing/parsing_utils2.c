@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:19:02 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 11:04:58 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/09/21 18:13:06 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	check_only_quo(char *str, char c, int i, int one)
 
 	two = 0;
 	d = check_only_quo_utils(c);
-	if (((int) ft_strlen(str)) == 1) // rajouter le if
+	if (((int) ft_strlen(str)) == 1)
 		return (1);
-	while (str[++i]) // changer le i
+	while (str[++i])
 	{
 		if (str[i] != c && str[i] != d)
 			return (1);

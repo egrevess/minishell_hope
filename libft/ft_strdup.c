@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:49:53 by viburton          #+#    #+#             */
-/*   Updated: 2022/10/05 15:49:55 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:28:55 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+#include <stdio.h>
 
 char	*ft_strdup(const char *s)
 {

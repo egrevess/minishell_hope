@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 13:09:09 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:14:50 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	check_dbqu_utils(t_struc *s, int index, int i, char ***par)
 
 	check = 0;
 	reps = 0;
-	(void)	par;
+	(void) par;
 	while (s->pars[index][i] == '\"' )
 	{
 		reps++;
@@ -86,9 +86,11 @@ static void	check_dbqu_utils(t_struc *s, int index, int i, char ***par)
 		i++;
 	}
 	if (check == reps && i == (int)ft_strlen(s->pars[index]))
-		par = ft_split(s->pars[index], '\"');
+		*par = ft_split(s->pars[index], '\"');
+	/*
 	else if (check != reps)
 		printf("Error: syntax error near unexpected token\n");
+	*/
 }
 
 void	check_double_quotes(t_struc *s, int index)
@@ -98,7 +100,7 @@ void	check_double_quotes(t_struc *s, int index)
 
 	i = 0;
 	par = NULL;
-	check_dbqu_utils(s, index, i, par);
+	check_dbqu_utils(s, index, i, &par);
 	if (!par)
 		return ;
 	if (ft_len_tab(par) == 1)
@@ -109,25 +111,46 @@ void	check_double_quotes(t_struc *s, int index)
 	}
 }
 
+static int	check_quotes(char *par, int *pass)
+{
+	int	i;
+
+	i = 1;
+	if (par[0] != '$')
+		return (-1);
+	while (par[i] != '\'' && par[i] != '\"')
+		i++;
+	if (i >= 1)
+	{
+		*pass = i;
+	}
+	return (*pass);
+}
+
 void	ft_sub_dollar(t_struc *s)
 {
-	int	index;
-	int	pass;
+	int		index;
+	int		pass;
+	char	*temp;
 
 	index = 0;
 	pass = -1;
 	while (s->pars[index])
 	{
+		temp = ft_strdup(s->pars[index]);
 		check_double_quotes(s, index);
-		if (s->pars[index][0] == '$')
+		if (s->pars[index][0] == '$' && (int) ft_strlen(s->pars[index]) > 1)
 		{
 			pass = ft_find_in_env_dollar(s, index);
+			free(s->pars[index]);
 			if (pass != -1)
-			{
-				free(s->pars[index]);
 				s->pars[index] = ft_find_in_env(s, pass);
-			}
+			else if (check_quotes(temp, &pass) != -1)
+				s->pars[index] = ft_substr(temp, pass, (int) ft_strlen(temp));
+			else
+				s->pars[index] = NULL;
 		}
 		index++;
+		free (temp);
 	}
 }

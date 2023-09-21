@@ -6,11 +6,40 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:56:16 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/18 12:38:35 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:20:31 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
+
+static char	*ft_strjoin_pipe(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	free ((char *) s1);
+	return (str);
+}
 
 int	ft_pipes(t_struc *s, t_pipe *p)
 {
@@ -35,8 +64,8 @@ t_list	*init_list(t_struc *s, t_list *c, int i)
 				command = ft_strjoin(s->pars[i], " ");
 			else
 			{
-				command = ft_strjoin(command, s->pars[i]);
-				command = ft_strjoin(command, " ");
+				command = ft_strjoin_pipe(command, s->pars[i]);
+				command = ft_strjoin_pipe(command, " ");
 			}
 		}
 		else
