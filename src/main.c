@@ -6,17 +6,15 @@
 /*   By: emmagrevesse <emmagrevesse@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 11:00:47 by emmagrevess      ###   ########.fr       */
+/*   Updated: 2023/09/21 10:43:18 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
 
-/*
 void	execut(int sig)
 {
 	(void) sig;
-
 	g_output = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -26,15 +24,8 @@ void	execut(int sig)
 void	execut1(int sig)
 {
 	(void) sig;
-	exit (EXIT_FAILURE);
+	exit (EXIT_SUCCESS);
 }
-
-void	execut2(int sig)
-{
-	(void) sig;
-	//censé rien faire 
-}
-*/
 
 char	*read_user_input(void)
 {
@@ -86,12 +77,12 @@ int	main(int argc, char **argv, char **env)
 	s.index = 0;
 	i = put_head();
 	p.nb_pipe = 0;
-	//signal(SIGINT, execut);
-	//signal(SIGQUIT,execut1);
 	if (argc != 1)
 		exit(EXIT_FAILURE);
 	while (42)
 	{
+		signal(SIGINT, execut);
+		signal(SIGQUIT, execut1);
 		s.str = read_user_input();
 		if (s.index == 0)
 		{

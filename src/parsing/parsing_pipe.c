@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 09:52:24 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/20 13:48:09 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:05:58 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ int	check_pipe(t_struc *s, t_pipe *p)
 	}
 	return (0);
 }
+
 void	pipe_utils2(t_struc *s, t_ij *t, char **temp)
 {
 	t->until = 0;
 	t->start = t->j;
-	while(s->pars[t->i][t->j] && s->pars[t->i][t->j] != '|')
+	while (s->pars[t->i][t->j] && s->pars[t->i][t->j] != '|')
 		t->j++;
 	temp[t->index] = malloc(sizeof(char *) * (t->j - t->start + 1));
 	while (t->j > t->start)
@@ -80,7 +81,7 @@ void	pipe_utils(t_struc *s, t_ij *t, char **temp)
 	else if (s->pars[t->i][t->j] == '|')
 	{
 		t->until = 0;
-		while(s->pars[t->i][t->j] == '|')
+		while (s->pars[t->i][t->j] == '|')
 		{
 			nb_pipe++;
 			t->j++;
