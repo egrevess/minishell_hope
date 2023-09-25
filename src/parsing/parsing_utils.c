@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 18:30:14 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:28:58 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ static void	check_dbqu_utils(t_struc *s, int index, int i, char ***par)
 	}
 	if (check == reps && i == (int)ft_strlen(s->pars[index]))
 		*par = ft_split(s->pars[index], '\"');
-	/*
-	else if (check != reps)
-		printf("Error: syntax error near unexpected token\n");
-	*/
 }
 
 void	check_double_quotes(t_struc *s, int index)
@@ -90,7 +86,7 @@ static int	check_quotes(char *par, int *pass)
 	i = 1;
 	if (par[0] != '$')
 		return (-1);
-	while (par[i] != '\'' && par[i] != '\"')
+	while (par[i] && par[i] != '\'' && par[i] != '\"')
 		i++;
 	if (i >= 1)
 	{
@@ -111,7 +107,8 @@ void	ft_sub_dollar(t_struc *s)
 	{
 		temp = ft_strdup(s->pars[index]);
 		check_double_quotes(s, index);
-		if (s->pars[index][0] == '$' && (int) ft_strlen(s->pars[index]) > 1)
+		if (s->pars[index][0] == '$' && (int) ft_strlen(s->pars[index]) > 1 &&
+			ft_strncmp(s->pars[0], "$?", 2) != 0)
 		{
 			pass = ft_find_in_env_dollar(s, index);
 			free(s->pars[index]);

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:56:52 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/18 13:09:00 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:02:52 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	ft_echo(t_struc *s)
 	while (s->pars[i])
 	{
 		ft_echo_utils(s, &i, &index, &check_nl);
+		if (ft_len_tab(s->pars) == i)
+			return ;
 		if (s->pars[i][0] == '$' && ft_find_in_env_dollar(s, index) == -1)
 			printf("");
 		if (ft_strncmp(s->pars[i], "$?", (size_t)2) == 0

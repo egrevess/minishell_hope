@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:49:41 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/18 16:30:56 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:15:58 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_dollar(t_struc *s)
 {
-	(void) s;
 	if (s->sizefirst_pars > 2)
 	{
 		printf("minishell: %d%s: command not found\n", g_output,

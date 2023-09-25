@@ -6,26 +6,11 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 18:44:50 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:32:29 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
-void	execut(int sig)
-{
-	(void) sig;
-	g_output = 130;
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	execut1(int sig)
-{
-	(void) sig;
-	exit (EXIT_SUCCESS);
-}
 
 char	*read_user_input(void)
 {
@@ -33,7 +18,7 @@ char	*read_user_input(void)
 
 	str = readline("burtonshell >$ ");
 	if (!str)
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	add_history(str);
 	return (str);
 }
@@ -55,9 +40,23 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 			pipes(s, ft_count_pipe1(s) + 1);
 	}
 	s->index += 1;
-	free(s->pwd); //deplacer ici mais normalement fonctionne
-	free(s->str); //deplacer ici mais normalement fonctionne
+	free(s->pwd);
+	free(s->str);
 	return (result);
+}
+
+void	handle_signal(char *s)
+{
+	if (s && ft_strncmp(s, "cat", 3) != 0 && ft_strncmp(s, "grep", 4) != 0)
+	{
+		signal(SIGINT, execut);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, execut1);
+		signal(SIGQUIT, execut2);
+	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -68,15 +67,15 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argv;
 	s.index = 0;
-	i = put_head();
 	p.nb_pipe = 0;
+	handle_signal(" ");
 	if (argc != 1)
 		exit(EXIT_FAILURE);
+	i = put_head();
 	while (42)
 	{
-		signal(SIGINT, execut);
-		signal(SIGQUIT, execut1);
 		s.str = read_user_input();
+		handle_signal(s.str);
 		if (s.index == 0)
 		{
 			s.result = ft_init_env(&s, env);

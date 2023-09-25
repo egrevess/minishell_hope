@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 18:35:13 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:30:43 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	ft_echo(t_struc *s);
 void	ft_export(t_struc *s);
 int		ft_len_tab(char **tab);
 void	ft_exit(void);
-void	ft_signal(int sig);
 int		ft_execve(t_struc *s, int res, int status, char *str);
 int		ft_unset(t_struc *s);
 int		ft_find_in_env_unset(t_struc *s, int index);
@@ -122,5 +121,8 @@ char	*ft_del_quotes(char	*s, char c, char d);
 int		ft_count_pipe(char **line, t_pipe *p);
 void	ft_free(t_struc *s, t_pipe *p);
 void	pipe_util(t_struc *s, char **commands, int i, int num_commands);
+void	execut(int sig);
+void	execut1(int sig);
+void	execut2(int sig);
 
 #endif

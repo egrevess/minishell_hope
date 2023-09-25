@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 00:18:14 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/08/17 17:31:13 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/09/25 14:43:33 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_find_in_env_unset(t_struc *s, int index)
 		}
 		i++;
 	}
-	if (j == -1)
+	if (j == -1 && ft_strncmp(s->env[i], "_=", 2) != 0)
 		s->env = ft_array_delete(s, i);
 	return (j);
 }

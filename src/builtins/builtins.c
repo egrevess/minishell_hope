@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 18:43:08 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:28:43 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ char	*ft_find_pdw(t_struc *s)
 	return (s->pwd);
 }
 
+static void	ft_pwd(char *str)
+{
+	g_output = 0;
+	printf("%s\n", str);
+}
+
 static void	handle_single_builtin(t_struc *s)
 {
 	s->sizefirst_pars = (int)ft_strlen(s->pars[0]);
@@ -29,10 +35,7 @@ static void	handle_single_builtin(t_struc *s)
 	else if (ft_strncmp(s->pars[0], "pwd", 3) == 0 && s->sizefirst_pars == 3)
 	{
 		if (s->pwd)
-		{
-			g_output = 0;
-			printf("%s\n", s->pwd);
-		}
+			ft_pwd(s->pwd);
 		else
 			g_output = 1;
 	}
@@ -47,7 +50,10 @@ static void	handle_single_builtin(t_struc *s)
 	else if (ft_strncmp(s->pars[0], "$?", 2) == 0)
 		ft_dollar(s);
 	else
+	{
 		g_output = ft_execve(s, 0, 0, NULL);
+		ft_free_array(s->path, ft_len_tab(s->path) - 1);
+	}
 }
 
 static void	handle_complex_builtin(t_struc *s)
@@ -72,7 +78,10 @@ static void	handle_complex_builtin(t_struc *s)
 		printf ("Error: syntax error near unexpected token\n");
 	}
 	else
+	{
 		g_output = ft_execve(s, 0, 0, NULL);
+		ft_free_array(s->path, ft_len_tab(s->path) - 1);
+	}
 }
 
 void	ft_builtins(t_struc *s)
@@ -83,5 +92,4 @@ void	ft_builtins(t_struc *s)
 	else if (s->size_pars > 1)
 		handle_complex_builtin(s);
 	ft_free_array(s->pars, ft_len_tab(s->pars) - 1);
-	//ft_free_array( s->path, ft_len_tab(s->path) - 1);
 }
