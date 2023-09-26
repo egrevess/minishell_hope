@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:57:47 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/25 14:28:43 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:27:05 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,15 @@ char	*ft_find_pdw(t_struc *s)
 	return (s->pwd);
 }
 
-static void	ft_pwd(char *str)
-{
-	g_output = 0;
-	printf("%s\n", str);
-}
-
 static void	handle_single_builtin(t_struc *s)
 {
 	s->sizefirst_pars = (int)ft_strlen(s->pars[0]);
 	if (ft_strncmp(s->pars[0], "env", 3) == 0 && s->sizefirst_pars == 3)
 		ft_printf_env(s);
 	else if (ft_strncmp(s->pars[0], "pwd", 3) == 0 && s->sizefirst_pars == 3)
-	{
-		if (s->pwd)
-			ft_pwd(s->pwd);
-		else
-			g_output = 1;
-	}
+		handle_pwd(s);
 	else if (ft_strncmp(s->pars[0], "echo", 4) == 0 && s->sizefirst_pars == 4)
-		printf("\n");
+		g_output = printf("\n") - 1;
 	else if (ft_strncmp(s->pars[0], "cd", 2) == 0 && s->sizefirst_pars == 2)
 		ft_cd(s);
 	else if (ft_strncmp(s->pars[0], "exit", 4) == 0 && s->sizefirst_pars == 4)
@@ -52,15 +41,19 @@ static void	handle_single_builtin(t_struc *s)
 	else
 	{
 		g_output = ft_execve(s, 0, 0, NULL);
-		ft_free_array(s->path, ft_len_tab(s->path) - 1);
+		free_path(s);
 	}
 }
 
 static void	handle_complex_builtin(t_struc *s)
 {
 	s->sizefirst_pars = (int)ft_strlen(s->pars[0]);
-	if (ft_strncmp(s->pars[0], "echo", 4) == 0 && s->sizefirst_pars == 4)
-		ft_echo(s);
+	if (ft_strncmp(s->pars[0], "expr", 4) == 0 && s->sizefirst_pars == 4)
+		g_output = ft_expr(s);
+	else if (ft_strncmp(s->pars[0], "echo", 4) == 0 && s->sizefirst_pars == 4)
+		g_output = ft_echo(s, 0);
+	else if (ft_strncmp(s->pars[0], "pwd", 3) == 0 && s->sizefirst_pars == 3)
+		handle_pwd(s);
 	else if (ft_strncmp(s->pars[0], "export", 6) == 0
 		&& s->sizefirst_pars == 6)
 		ft_export(s);
@@ -73,14 +66,11 @@ static void	handle_complex_builtin(t_struc *s)
 	else if (ft_strncmp(s->pars[0], "$?", 2) == 0)
 		ft_dollar(s);
 	else if (ft_strncmp(s->pars[0], "env", 3) == 0 && s->sizefirst_pars == 3)
-	{
-		g_output = 1;
-		printf ("Error: syntax error near unexpected token\n");
-	}
+		g_output = printf ("Error: syntax error near unexpected token\n") - 41;
 	else
 	{
 		g_output = ft_execve(s, 0, 0, NULL);
-		ft_free_array(s->path, ft_len_tab(s->path) - 1);
+		free_path(s);
 	}
 }
 

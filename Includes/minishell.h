@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/25 14:30:43 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:34:03 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		ft_init_env(t_struc *s, char **env);
 char	*ft_find_in_env(t_struc *s, int i);
 int		ft_find_in_env_export(t_struc *s, int index);
 char	*ft_find_pdw(t_struc *s);
-void	ft_echo(t_struc *s);
+int		ft_echo(t_struc *s, int index);
 void	ft_export(t_struc *s);
 int		ft_len_tab(char **tab);
 void	ft_exit(void);
@@ -124,5 +124,8 @@ void	pipe_util(t_struc *s, char **commands, int i, int num_commands);
 void	execut(int sig);
 void	execut1(int sig);
 void	execut2(int sig);
+int		ft_expr(t_struc *s);
+void	free_path(t_struc *s);
+void	handle_pwd(t_struc *s);
 
 #endif

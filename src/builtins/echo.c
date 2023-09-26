@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:56:52 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/25 14:02:52 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:14:03 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_echo_option(char **par)
 
 static void	ft_echo_utils(t_struc *s, int *i, int *index, int *check_nl)
 {
-	if (ft_strncmp(s->pars[*i], "-n", (size_t)2) == 0 && *i == 1)
+	if (ft_strncmp(s->pars[*i], "-n", 2) == 0 && *i == 1)
 	{
 		*check_nl = ft_echo_option(s->pars);
 		while (*check_nl > *index)
@@ -58,23 +58,21 @@ static void	ft_echo_utils(t_struc *s, int *i, int *index, int *check_nl)
 	}
 }
 
-void	ft_echo(t_struc *s)
+int	ft_echo(t_struc *s, int index)
 {
 	int	i;
-	int	index;
 	int	check_nl;
 
 	i = 1;
 	check_nl = 0;
-	index = 0;
 	while (s->pars[i])
 	{
 		ft_echo_utils(s, &i, &index, &check_nl);
 		if (ft_len_tab(s->pars) == i)
-			return ;
+			return (0);
 		if (s->pars[i][0] == '$' && ft_find_in_env_dollar(s, index) == -1)
 			printf("");
-		if (ft_strncmp(s->pars[i], "$?", (size_t)2) == 0
+		if (ft_strncmp(s->pars[i], "$?", 2) == 0
 			&& (int)ft_strlen(s->pars[i]) == 2)
 			printf("%d", g_output);
 		else if (s->pars[i])
@@ -85,4 +83,5 @@ void	ft_echo(t_struc *s)
 	}
 	if (check_nl == 0)
 		printf("\n");
+	return (0);
 }

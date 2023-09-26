@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:34:44 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/21 16:53:33 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:40:33 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	execute_command(char **path, char **pars, char **env)
 		i++ ;
 	}
 	printf("minishell: %s: command not found\n", pars[0]);
-	exit(1);
+	exit(127);
 	return (1);
 }
 

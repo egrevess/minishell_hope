@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:47:53 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/25 14:28:58 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:06:19 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ void	ft_sub_dollar(t_struc *s)
 	pass = -1;
 	while (s->pars[index])
 	{
-		temp = ft_strdup(s->pars[index]);
 		check_double_quotes(s, index);
+		temp = ft_strdup(s->pars[index]);
 		if (s->pars[index][0] == '$' && (int) ft_strlen(s->pars[index]) > 1 &&
-			ft_strncmp(s->pars[0], "$?", 2) != 0)
+			ft_strncmp(s->pars[index], "$?", 2) != 0)
 		{
 			pass = ft_find_in_env_dollar(s, index);
 			free(s->pars[index]);

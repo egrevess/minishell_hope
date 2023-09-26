@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:44:22 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/25 14:30:52 by viburton         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:00:41 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	execut(int sig)
 
 void	execut1(int sig)
 {
+	(void) sig;
 	printf("\n");
 }
 
 void	execut2(int sig)
 {
+	(void) sig;
 	printf("Quit: 3\n");
 }
