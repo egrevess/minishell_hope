@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/26 17:34:03 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:01:30 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdlib.h>
+#include <fcntl.h>
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -55,6 +56,7 @@ typedef struct s_struc
 	int		checker_export;
 	int		nb_pipe;
 	int		echo_quotes;
+	char	*heredoc_content;
 }		t_struc;
 
 typedef struct s_var
@@ -81,7 +83,7 @@ typedef struct s_command
 }		t_command;
 
 int		put_head(void);
-void	ft_parse(char *str, t_struc *s, t_pipe *p);
+int		ft_parse(char *str, t_struc *s, t_pipe *p);
 char	**ft_parse_quotes(t_struc *s);
 void	ft_builtins(t_struc *s);
 int		ft_free_array(char **tab, int index);
@@ -127,5 +129,6 @@ void	execut2(int sig);
 int		ft_expr(t_struc *s);
 void	free_path(t_struc *s);
 void	handle_pwd(t_struc *s);
+void 	redirection(char *filename, int choice, char *str);
 
 #endif

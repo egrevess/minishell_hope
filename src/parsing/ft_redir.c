@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 16:44:22 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/10/02 13:47:06 by viburton         ###   ########.fr       */
+/*   Created: 2023/10/02 13:52:03 by viburton          #+#    #+#             */
+/*   Updated: 2023/10/02 14:06:38 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minishell.h"
+#include "../../Includes/minishell.h"
 
-void	execut(int sig)
+char **ft_redirc(char *str)
 {
-	(void) sig;
-	g_output = 130;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+    int i;
+    char *res;
 
-void	execut1(int sig)
-{
-	(void) sig;
-	printf("\n");
-}
-
-void	execut2(int sig)
-{
-	(void) sig;
-	printf("Quit: 3\n");
+    i = 0;
+    res = malloc(ft_strlen(str) * 
+    while (str[i])
+    {
+        if (str[i] == '<' || str[i] == '>')
+        {
+            if (str[i+1] && (str[i+1] == '<' || str[i+1] == '>'))
+                res[i]
+        }
+        
+    }
+    return (s->pars);
 }

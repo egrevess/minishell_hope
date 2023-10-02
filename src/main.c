@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/25 14:32:29 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:47:31 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*read_user_input(void)
 	str = readline("burtonshell >$ ");
 	if (!str)
 		exit(EXIT_SUCCESS);
+	printf("in execut\n");
 	add_history(str);
 	return (str);
 }
@@ -27,7 +28,8 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 {
 	int		result;
 
-	ft_parse(input, s, p);
+	if (ft_parse(input, s, p) == 4)
+		return (1);
 	result = ft_pipes(s, p);
 	ft_sub_dollar(s);
 	s->pars = ft_parse_quotes(s);

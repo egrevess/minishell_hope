@@ -6,16 +6,55 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/09/21 18:29:50 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:57:26 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minishell.h"
 
-void	ft_parse(char *str, t_struc *s, t_pipe *p)
+int	ft_parse(char *str, t_struc *s, t_pipe *p)
 {
+	int		i;
+	char	*delimiter;
+
+	i = 0;
+	delimiter = NULL;
+	s->heredoc_content = "\0";
+	while (str[i])
+	{
+		if (str[i] == '<' && str[i + 1] == '<')
+		{
+			if (str[i + 2] == ' ')
+				delimiter = ft_substr(str, i + 3, ft_strlen(str));
+			else
+				delimiter = ft_substr(str, i + 2, ft_strlen(str));
+			break ;
+		}
+		else if (str[i] == '>')
+		{
+			if (str[i+ 1] == '>')
+				if (str[i + 2] == ' ')
+					redirection(ft_substr(str, i + 3, ft_strlen(str)), 2, str);
+				else
+					redirection(ft_substr(str, i + 2, ft_strlen(str)), 2, str);
+			else
+				if (str[i + 2] == ' ')
+					redirection(ft_substr(str, i + 3, ft_strlen(str)), 1, str);
+				else
+					redirection(ft_substr(str, i + 2, ft_strlen(str)), 1, str);
+		}
+		i++;
+	}
+	if (delimiter)
+	{
+		s->pars = ft_split(str, ' ');
+		heredoc_handle(s, delimiter);
+		return (4);
+	}
+	//s->pars = ft_redirc(str);
 	s->pars = ft_split(str, ' ');
 	s->pars = ft_pipe(s, p);
+	return (0);
 }
 
 static char	**ft_array_del(char **s, int find)
