@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/02 15:57:26 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:56:49 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ int	ft_parse(char *str, t_struc *s, t_pipe *p)
 		{
 			if (str[i+ 1] == '>')
 				if (str[i + 2] == ' ')
-					redirection(ft_substr(str, i + 3, ft_strlen(str)), 2, str);
+					redirection(ft_substr(str, i + 3, ft_strlen(str)), 2, str, s);
 				else
-					redirection(ft_substr(str, i + 2, ft_strlen(str)), 2, str);
+					redirection(ft_substr(str, i + 2, ft_strlen(str)), 2, str, s);
 			else
 				if (str[i + 2] == ' ')
-					redirection(ft_substr(str, i + 3, ft_strlen(str)), 1, str);
+					redirection(ft_substr(str, i + 3, ft_strlen(str)), 1, str, s);
 				else
-					redirection(ft_substr(str, i + 2, ft_strlen(str)), 1, str);
+					redirection(ft_substr(str, i + 2, ft_strlen(str)), 1, str, s);
+			return (4);
 		}
 		i++;
 	}
