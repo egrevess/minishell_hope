@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:12 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/06 16:02:16 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:03:40 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -129,6 +129,7 @@ void	execut2(int sig);
 int		ft_expr(t_struc *s);
 void	free_path(t_struc *s);
 void	handle_pwd(t_struc *s);
-void 	redirection(char *filename, int choice, char *str, t_struc *s);
+int		redirection(int i, char *str, t_struc *s);
+int		heredocs(int i, char *delimiter, char *str, t_struc *s);
 
 #endif

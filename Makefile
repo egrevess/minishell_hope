@@ -27,8 +27,9 @@ SRC =	src/main.c\
 		src/parsing/parsing_utils4.c\
 		src/parsing/ft_count_pipe.c\
 		src/ft_expr.c\
-		src/heredoc.c\
-		src/redirection.c\
+		src/redirection/heredoc.c\
+		src/redirection/redirection.c\
+		src/redirection/redir_in.c\
 
 
 

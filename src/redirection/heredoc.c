@@ -6,11 +6,11 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:12:05 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/06 17:22:05 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:53:29 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minishell.h"
+#include "../../Includes/minishell.h"
 
 void	execute_with_heredoc(t_struc *s, char *command, char *heredoc_content)
 {

@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/06 15:56:49 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:03:26 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,13 @@ int	ft_parse(char *str, t_struc *s, t_pipe *p)
 	s->heredoc_content = "\0";
 	while (str[i])
 	{
-		if (str[i] == '<' && str[i + 1] == '<')
+		if (str[i] == '<')
 		{
-			if (str[i + 2] == ' ')
-				delimiter = ft_substr(str, i + 3, ft_strlen(str));
-			else
-				delimiter = ft_substr(str, i + 2, ft_strlen(str));
-			break ;
+			if (heredocs(i, delimiter, str, s) == 4)
+				return (4);
 		}
 		else if (str[i] == '>')
-		{
-			if (str[i+ 1] == '>')
-				if (str[i + 2] == ' ')
-					redirection(ft_substr(str, i + 3, ft_strlen(str)), 2, str, s);
-				else
-					redirection(ft_substr(str, i + 2, ft_strlen(str)), 2, str, s);
-			else
-				if (str[i + 2] == ' ')
-					redirection(ft_substr(str, i + 3, ft_strlen(str)), 1, str, s);
-				else
-					redirection(ft_substr(str, i + 2, ft_strlen(str)), 1, str, s);
-			return (4);
-		}
+			return (redirection(i, str, s));
 		i++;
 	}
 	if (delimiter)
@@ -52,7 +37,6 @@ int	ft_parse(char *str, t_struc *s, t_pipe *p)
 		heredoc_handle(s, delimiter);
 		return (4);
 	}
-	//s->pars = ft_redirc(str);
 	s->pars = ft_split(str, ' ');
 	s->pars = ft_pipe(s, p);
 	return (0);
