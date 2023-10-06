@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/02 14:47:31 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:54:03 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*read_user_input(void)
 	str = readline("burtonshell >$ ");
 	if (!str)
 		exit(EXIT_SUCCESS);
-	printf("in execut\n");
 	add_history(str);
 	return (str);
 }
@@ -47,19 +46,19 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	return (result);
 }
 
-void	handle_signal(char *s)
-{
-	if (s && ft_strncmp(s, "cat", 3) != 0 && ft_strncmp(s, "grep", 4) != 0)
-	{
-		signal(SIGINT, execut);
-		signal(SIGQUIT, SIG_IGN);
-	}
-	else
-	{
-		signal(SIGINT, execut1);
-		signal(SIGQUIT, execut2);
-	}
-}
+// void	handle_signal(char *s)
+// {
+// 	if (s && ft_strncmp(s, "cat", 3) != 0 && ft_strncmp(s, "grep", 4) != 0)
+// 	{
+// 		signal(SIGINT, execut);
+// 		signal(SIGQUIT, SIG_IGN);
+// 	}
+// 	else
+// 	{
+// 		signal(SIGINT, execut1);
+// 		signal(SIGQUIT, execut2);
+// 	}
+// }
 
 int	main(int argc, char **argv, char **env)
 {
@@ -70,14 +69,14 @@ int	main(int argc, char **argv, char **env)
 	(void) argv;
 	s.index = 0;
 	p.nb_pipe = 0;
-	handle_signal(" ");
+	//handle_signal(" ");
 	if (argc != 1)
 		exit(EXIT_FAILURE);
 	i = put_head();
 	while (42)
 	{
 		s.str = read_user_input();
-		handle_signal(s.str);
+		//handle_signal(s.str);
 		if (s.index == 0)
 		{
 			s.result = ft_init_env(&s, env);

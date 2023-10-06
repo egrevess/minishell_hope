@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:12:05 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/02 16:09:02 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:00:10 by victorburto      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,22 @@ void redirection(char *filename, int choice, char *str)
 
 	// Ouvrir le fichier en mode écriture (O_CREAT : créer le fichier s'il n'existe pas)
 	if (choice == 2)
-		descripteurFichier = open(filename, O_WRONLY | O_CREAT, O_APPEND, S_IRUSR | S_IWUSR);
-
-	if (choice == 1)
-		descripteurFichier = open(filename, O_WRONLY | O_CREAT, O_TRUNC, S_IRUSR | S_IWUSR);
-	
-	// Vérifier si l'ouverture du fichier a réussi
-	if (descripteurFichier == -1) {
-		perror("Erreur lors de l'ouverture du fichier");
-		exit(EXIT_FAILURE);
+	{
+		descripteurFichier = open(filename, O_WRONLY | O_CREAT | O_APPEND, 000777);
+		printf("coucou\n");
 	}
 
+	if (choice == 1)
+		descripteurFichier = open(filename, O_WRONLY | O_CREAT, O_TRUNC, 000777);
+	
+	// // Vérifier si l'ouverture du fichier a réussi
+	// if (descripteurFichier == -1) {
+	// 	perror("Erreur lors de l'ouverture du fichier");
+	// 	exit(EXIT_FAILURE);
+	// }
+
 	// Écrire dans le fichier
-	write(descripteurFichier, "Bonjour, monde !\n", 17);
-	printf("coucou\n");
+	write(descripteurFichier, str, ft_strlen(str));
 	// Fermer le fichier
 	close(descripteurFichier);
 }
