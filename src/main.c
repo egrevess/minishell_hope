@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/09 14:58:41 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:28:57 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*read_user_input(void)
 {
 	char	*str;
+
 	str = readline("burtonshell >$ ");
 	if (!str)
 		exit(EXIT_SUCCESS);
@@ -29,9 +30,6 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	if (ft_parse(input, s, p) == 4)
 	{
 		free(s->str);
-		// if (s->pars)
-		// 	ft_free_array(s->pars, ft_len_tab(s->pars) - 1);
-		// ft_free_array(s->env, ft_len_tab(s->env) - 1);
 		return (1);
 	}
 	result = ft_pipes(s, p);

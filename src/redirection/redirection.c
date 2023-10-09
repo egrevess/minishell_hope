@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:09:09 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/09 16:26:59 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:30:17 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ static char	**pars_redir(char *str)
 	res = ft_split(str, ' ');
 	while (res[i] && res[i][0] != '>')
 		i++;
-	while (res[i])
-	{
-		res[i] = NULL;
+	free(res[i]);
+	res[i] = NULL;
+	while (res[i++])
 		free(res[i]);
-		i++;
-	}
+	free(res[i]);
 	return (res);
 }
 
@@ -78,6 +77,8 @@ static void	redir(char *filename, int choice, char *str, t_struc *s)
 {
 	s->pars = pars_redir(str);
 	pipe_redir(s, filename, choice);
+	free(filename);
+	ft_free_array(s->pars, ft_len_tab(s->pars) - 1);
 }
 
 int	redirection(int i, char *str, t_struc *s)
