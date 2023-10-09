@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorburton <victorburton@student.42.f    +#+  +:+       +#+        */
+/*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/04 12:54:03 by victorburto      ###   ########.fr       */
+/*   Updated: 2023/10/09 14:58:41 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*read_user_input(void)
 {
 	char	*str;
-
 	str = readline("burtonshell >$ ");
 	if (!str)
 		exit(EXIT_SUCCESS);
@@ -28,7 +27,13 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	int		result;
 
 	if (ft_parse(input, s, p) == 4)
+	{
+		free(s->str);
+		// if (s->pars)
+		// 	ft_free_array(s->pars, ft_len_tab(s->pars) - 1);
+		// ft_free_array(s->env, ft_len_tab(s->env) - 1);
 		return (1);
+	}
 	result = ft_pipes(s, p);
 	ft_sub_dollar(s);
 	s->pars = ft_parse_quotes(s);
@@ -46,19 +51,19 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	return (result);
 }
 
-// void	handle_signal(char *s)
-// {
-// 	if (s && ft_strncmp(s, "cat", 3) != 0 && ft_strncmp(s, "grep", 4) != 0)
-// 	{
-// 		signal(SIGINT, execut);
-// 		signal(SIGQUIT, SIG_IGN);
-// 	}
-// 	else
-// 	{
-// 		signal(SIGINT, execut1);
-// 		signal(SIGQUIT, execut2);
-// 	}
-// }
+void	handle_signal(char *s)
+{
+	if (s && ft_strncmp(s, "cat", 3) != 0 && ft_strncmp(s, "grep", 4) != 0)
+	{
+		signal(SIGINT, execut);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, execut1);
+		signal(SIGQUIT, execut2);
+	}
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -69,14 +74,14 @@ int	main(int argc, char **argv, char **env)
 	(void) argv;
 	s.index = 0;
 	p.nb_pipe = 0;
-	//handle_signal(" ");
+	handle_signal(" ");
 	if (argc != 1)
 		exit(EXIT_FAILURE);
 	i = put_head();
 	while (42)
 	{
 		s.str = read_user_input();
-		//handle_signal(s.str);
+		handle_signal(s.str);
 		if (s.index == 0)
 		{
 			s.result = ft_init_env(&s, env);

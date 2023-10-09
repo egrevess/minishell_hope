@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:29:54 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/06 19:03:26 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:20:51 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,11 @@ int	ft_parse(char *str, t_struc *s, t_pipe *p)
 	s->heredoc_content = "\0";
 	while (str[i])
 	{
-		if (str[i] == '<')
-		{
-			if (heredocs(i, delimiter, str, s) == 4)
-				return (4);
-		}
+		if (str[i] == '<' /*&& str[i - 1] != '<'*/)
+			return (heredocs(i, delimiter, str, s));
 		else if (str[i] == '>')
 			return (redirection(i, str, s));
 		i++;
-	}
-	if (delimiter)
-	{
-		s->pars = ft_split(str, ' ');
-		heredoc_handle(s, delimiter);
-		return (4);
 	}
 	s->pars = ft_split(str, ' ');
 	s->pars = ft_pipe(s, p);
