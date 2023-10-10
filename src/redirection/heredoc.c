@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:12:05 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/09 17:30:52 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:19:18 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ static char	**ft_array_del(t_struc *s)
 		exit (EXIT_FAILURE);
 	i = 0;
 	index = 0;
-	while (s->pars[i + 2])
+	while (s->pars[i])
 	{
 		if (s->pars[i][0] == '<' && s->pars[i][1] == '<')
 			i = i + 2;
+		if (ft_len_tab(s->pars) - 1 < i)
+			break ;
 		temp[index] = ft_strdup(s->pars[i]);
 		index++;
 		i++;

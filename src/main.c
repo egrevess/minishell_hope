@@ -6,7 +6,7 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:29:01 by viburton          #+#    #+#             */
-/*   Updated: 2023/10/09 17:28:57 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:11:04 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	process_user_input(char *input, t_struc *s, t_pipe *p)
 	if (ft_parse(input, s, p) == 4)
 	{
 		free(s->str);
+		s->index += 1;
 		return (1);
 	}
 	result = ft_pipes(s, p);

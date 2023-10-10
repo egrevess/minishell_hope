@@ -6,11 +6,17 @@
 /*   By: viburton <viburton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:34:44 by emmagrevess       #+#    #+#             */
-/*   Updated: 2023/09/26 12:40:33 by viburton         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:18:13 by viburton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
+
+static void	ft_print_er(t_struc *s)
+{
+	printf("minishell: %s: No such file or directory\n", s->pars[0]);
+	s->path = NULL;
+}
 
 static int	execute_command(char **path, char **pars, char **env)
 {
@@ -44,7 +50,7 @@ int	ft_execve(t_struc *s, int res, int status, char *str)
 	}
 	else
 	{
-		printf("minishell: %s: No such file or directory\n", s->pars[0]);
+		ft_print_er(s);
 		return (1);
 	}
 	pid = fork ();
